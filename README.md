@@ -29,8 +29,22 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## MVP:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ - Ingredient scaling (halve, double, etc.)
+ - Unit conversion (cups to tablespoons, etc.)
+ - Convert between imperial and metric units
+ - Temperature conversion (Fahrenheit to Celsius, etc.)
+ - Focus on US measurements to begin with
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Future:
+
+ - Convert between volume and weight (this will require research)
+ - Convert whole recipes
+ - Allow users to add their own conversions (locally)
+ - Save last used conversions
+
+## Always:
+
+ - Make it a better user experience than other top converters.
+ - Beat other converters in SEO
