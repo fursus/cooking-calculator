@@ -17,69 +17,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-const conversionTypes = ["Volume", "Weight", "Temperature"];
-const volumeUnits = [
-  "cups",
-  "tablespoons",
-  "teaspoons",
-  "fluid ounces",
-  "milliliters",
-  "liters",
-];
-const weightUnits = ["ounces", "pounds", "grams", "kilograms"];
-const temperatureUnits = ["Fahrenheit", "Celsius"];
-
-const volumeConversions = {
-  cups: 1,
-  tablespoons: 16,
-  teaspoons: 48,
-  "fluid ounces": 8,
-  milliliters: 236.588,
-  liters: 0.236588,
-};
-
-const weightConversions = {
-  ounces: 1,
-  pounds: 0.0625,
-  grams: 28.3495,
-  kilograms: 0.0283495,
-};
-
-function convertVolume(
-  value: number,
-  fromUnit: string,
-  toUnit: string
-): number {
-  const baseCups =
-    value / volumeConversions[fromUnit as keyof typeof volumeConversions];
-  return baseCups * volumeConversions[toUnit as keyof typeof volumeConversions];
-}
-
-function convertWeight(
-  value: number,
-  fromUnit: string,
-  toUnit: string
-): number {
-  const baseOunces =
-    value / weightConversions[fromUnit as keyof typeof weightConversions];
-  return (
-    baseOunces * weightConversions[toUnit as keyof typeof weightConversions]
-  );
-}
-
-function convertTemperature(
-  value: number,
-  fromUnit: string,
-  toUnit: string
-): number {
-  if (fromUnit === toUnit) return value;
-  if (fromUnit === "Fahrenheit") {
-    return (value - 32) * (5 / 9);
-  } else {
-    return value * (9 / 5) + 32;
-  }
-}
+import {
+  conversionTypes,
+  temperatureUnits,
+  volumeUnits,
+  weightUnits,
+} from "@/lib/constants";
+import {
+  convertVolume,
+  convertWeight,
+  convertTemperature,
+} from "@/lib/unit-converter-helper";
 
 export default function UnitConverter() {
   const [conversionType, setConversionType] = useState<string>("Volume");
@@ -129,7 +77,7 @@ export default function UnitConverter() {
             <Label htmlFor="conversion-type">Conversion Type</Label>
             <Select
               value={conversionType}
-              onValueChange={(value) => {
+              onValueChange={(value: string) => {
                 setConversionType(value);
                 const units =
                   value === "Volume"
