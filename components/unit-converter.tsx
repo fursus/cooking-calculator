@@ -24,6 +24,7 @@ import {
   convertWeight,
   convertTemperature,
 } from "@/lib/unit-converter-helper";
+import { formatNumber } from "@/lib/utils";
 
 type ConversionType = "volume" | "weight" | "temperature";
 
@@ -32,7 +33,6 @@ interface ConversionState {
   fromUnit: string;
   toUnit: string;
 }
-
 export default function UnitConverter() {
   const [states, setStates] = useState<Record<ConversionType, ConversionState>>(
     {
@@ -55,6 +55,11 @@ export default function UnitConverter() {
 
   const convert = (type: ConversionType) => {
     const { input, fromUnit, toUnit } = states[type];
+
+    if (isNaN(input)) {
+      return "";
+    }
+
     switch (type) {
       case "volume":
         return convertVolume(input, fromUnit, toUnit);
@@ -62,6 +67,8 @@ export default function UnitConverter() {
         return convertWeight(input, fromUnit, toUnit);
       case "temperature":
         return convertTemperature(input, fromUnit, toUnit);
+      default:
+        return "";
     }
   };
 
@@ -79,6 +86,8 @@ export default function UnitConverter() {
     const state = states[type];
     const units = getUnits(type);
     const result = convert(type);
+    const formattedResult =
+      typeof result === "number" ? formatNumber(result) : result;
 
     return (
       <div className="space-y-4">
@@ -89,9 +98,7 @@ export default function UnitConverter() {
             type="number"
             value={state.input}
             onChange={(e) =>
-              updateState(type, {
-                input: Number.parseFloat(e.target.value) || 0,
-              })
+              updateState(type, { input: Number(e.target.value) })
             }
           />
         </div>
@@ -137,8 +144,8 @@ export default function UnitConverter() {
           <Label htmlFor={`${type}-result`}>Result</Label>
           <Input
             id={`${type}-result`}
-            type="number"
-            value={result.toFixed(2)}
+            type="text"
+            value={formattedResult}
             readOnly
           />
         </div>
