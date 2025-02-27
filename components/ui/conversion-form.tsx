@@ -77,6 +77,7 @@ export const ConversionForm = ({ type }: { type: ConversionType }) => {
       <div className="space-y-2">
         <Label htmlFor={`${type}-input`}>Value</Label>
         <Input
+          autoFocus
           id={`${type}-input`}
           type="number"
           value={state.input}
