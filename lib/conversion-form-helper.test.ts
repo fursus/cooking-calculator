@@ -3,6 +3,7 @@ import {
   convertWeight,
   convertTemperature,
   getUnits,
+  convert,
 } from "./conversion-form-helper";
 
 import { volumeUnits, weightUnits, temperatureUnits } from "./constants";
@@ -78,6 +79,28 @@ describe("Unit Converter Helper", () => {
     it("should return the correct units for temperature", () => {
       const result = getUnits("temperature");
       expect(result).toBe(temperatureUnits);
+    });
+  });
+
+  describe("convert", () => {
+    it("should convert volume", () => {
+      const result = convert("volume", "1", "cups", "tablespoons");
+      expect(result).toBe(16);
+    });
+
+    it("should convert weight", () => {
+      const result = convert("weight", "1", "ounces", "pounds");
+      expect(result).toBe(0.0625);
+    });
+
+    it("should convert temperature", () => {
+      const result = convert("temperature", "-40", "Fahrenheit", "Celsius");
+      expect(result).toBe(-40);
+    });
+
+    it("should return an empty string if the input is empty", () => {
+      const result = convert("volume", "", "cups", "tablespoons");
+      expect(result).toBe("");
     });
   });
 });
