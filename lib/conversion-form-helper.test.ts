@@ -102,5 +102,10 @@ describe("Unit Converter Helper", () => {
       const result = convert("volume", "", "cups", "tablespoons");
       expect(result).toBe("");
     });
+
+    it("should return an empty string if the input is not a number", () => {
+      const result = convert("volume", "not a number", "cups", "tablespoons");
+      expect(result).toBe("");
+    });
   });
 });
