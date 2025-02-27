@@ -2,7 +2,10 @@ import {
   convertVolume,
   convertWeight,
   convertTemperature,
+  getUnits,
 } from "./conversion-form-helper";
+
+import { volumeUnits, weightUnits, temperatureUnits } from "./constants";
 
 describe("Unit Converter Helper", () => {
   describe("convertVolume", () => {
@@ -58,6 +61,23 @@ describe("Unit Converter Helper", () => {
     it("should return the same temperature for the same unit", () => {
       const result = convertTemperature(1, "Fahrenheit", "Fahrenheit");
       expect(result).toBe(1);
+    });
+  });
+
+  describe("getUnits", () => {
+    it("should return the correct units for volume", () => {
+      const result = getUnits("volume");
+      expect(result).toBe(volumeUnits);
+    });
+
+    it("should return the correct units for weight", () => {
+      const result = getUnits("weight");
+      expect(result).toBe(weightUnits);
+    });
+
+    it("should return the correct units for temperature", () => {
+      const result = getUnits("temperature");
+      expect(result).toBe(temperatureUnits);
     });
   });
 });
