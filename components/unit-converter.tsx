@@ -10,14 +10,6 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConversionForm } from "./ui/conversion-form";
 
-export type ConversionType = "volume" | "weight" | "temperature";
-
-export interface ConversionState {
-  input: number;
-  fromUnit: string;
-  toUnit: string;
-}
-
 export default function UnitConverter() {
   return (
     <Card className="w-full max-w-md mx-auto">
