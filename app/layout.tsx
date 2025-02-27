@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cooking Companion",
   description:
-    "Cooking Companion is an all-in-one cooking calculator for your cooking and baking needs.",
+    "Cooking Companion is an all-in-one calculator for your cooking and baking needs.",
 };
 
 export default function RootLayout({
