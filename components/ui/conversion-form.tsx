@@ -17,25 +17,46 @@ import {
 } from "@/components/ui/select";
 
 export const ConversionForm = ({ type }: { type: ConversionType }) => {
-  const [states, setStates] = useState<Record<ConversionType, ConversionState>>(
-    {
-      volume: { input: "", fromUnit: "cups", toUnit: "tablespoons" },
-      weight: { input: "", fromUnit: "ounces", toUnit: "grams" },
-      temperature: { input: "", fromUnit: "Fahrenheit", toUnit: "Celsius" },
-    }
-  );
+  // Separate states for each conversion type
+  const [volumeState, setVolumeState] = useState<ConversionState>({
+    input: "",
+    fromUnit: "cups",
+    toUnit: "tablespoons",
+  });
+
+  const [weightState, setWeightState] = useState<ConversionState>({
+    input: "",
+    fromUnit: "ounces",
+    toUnit: "grams",
+  });
+
+  const [temperatureState, setTemperatureState] = useState<ConversionState>({
+    input: "",
+    fromUnit: "Fahrenheit",
+    toUnit: "Celsius",
+  });
 
   const updateState = (
     type: ConversionType,
     updates: Partial<ConversionState>
   ) => {
-    setStates((prev) => ({
-      ...prev,
-      [type]: { ...prev[type], ...updates },
-    }));
+    if (type === "volume") {
+      setVolumeState((prev) => ({ ...prev, ...updates }));
+    } else if (type === "weight") {
+      setWeightState((prev) => ({ ...prev, ...updates }));
+    } else if (type === "temperature") {
+      setTemperatureState((prev) => ({ ...prev, ...updates }));
+    }
   };
 
-  const state = states[type];
+  // Determine the current state based on the conversion type
+  const state =
+    type === "volume"
+      ? volumeState
+      : type === "weight"
+      ? weightState
+      : temperatureState;
+
   const units = getUnits(type);
   const result = convert(type, state.input, state.fromUnit, state.toUnit);
   const formattedResult =
