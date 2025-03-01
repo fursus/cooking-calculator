@@ -1,14 +1,29 @@
-export const conversionTypes = ["Volume", "Weight", "Temperature"];
-export const volumeUnits = [
-  "cups",
-  "tablespoons",
-  "teaspoons",
-  "fluid ounces",
-  "milliliters",
-  "liters",
-];
-export const weightUnits = ["ounces", "pounds", "grams", "kilograms"];
-export const temperatureUnits = ["Fahrenheit", "Celsius"];
+export enum ConversionType {
+  Volume = "Volume",
+  Weight = "Weight",
+  Temperature = "Temperature",
+}
+
+export enum VolumeUnit {
+  Cups = "cups",
+  Tablespoons = "tablespoons",
+  Teaspoons = "teaspoons",
+  FluidOunces = "fluid ounces",
+  Milliliters = "milliliters",
+  Liters = "liters",
+}
+
+export enum WeightUnit {
+  Ounces = "ounces",
+  Pounds = "pounds",
+  Grams = "grams",
+  Kilograms = "kilograms",
+}
+
+export enum TemperatureUnit {
+  Fahrenheit = "Fahrenheit",
+  Celsius = "Celsius",
+}
 
 export const volumeConversions = {
   cups: 1,

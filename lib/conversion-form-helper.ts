@@ -1,23 +1,22 @@
 import {
-  temperatureUnits,
   volumeConversions,
-  volumeUnits,
   weightConversions,
-  weightUnits,
+  ConversionType,
+  VolumeUnit,
+  WeightUnit,
+  TemperatureUnit,
 } from "./constants";
-
-export type ConversionType = "volume" | "weight" | "temperature";
 
 export interface ConversionState {
   input: string;
-  fromUnit: string;
-  toUnit: string;
+  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit;
+  toUnit: VolumeUnit | WeightUnit | TemperatureUnit;
 }
 
 export function convertVolume(
   value: number,
-  fromUnit: string,
-  toUnit: string
+  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit,
+  toUnit: VolumeUnit | WeightUnit | TemperatureUnit
 ): number {
   const baseCups =
     value / volumeConversions[fromUnit as keyof typeof volumeConversions];
@@ -26,8 +25,8 @@ export function convertVolume(
 
 export function convertWeight(
   value: number,
-  fromUnit: string,
-  toUnit: string
+  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit,
+  toUnit: VolumeUnit | WeightUnit | TemperatureUnit
 ): number {
   const baseOunces =
     value / weightConversions[fromUnit as keyof typeof weightConversions];
@@ -38,8 +37,8 @@ export function convertWeight(
 
 export function convertTemperature(
   value: number,
-  fromUnit: string,
-  toUnit: string
+  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit,
+  toUnit: VolumeUnit | WeightUnit | TemperatureUnit
 ): number {
   if (fromUnit === toUnit) return value;
   if (fromUnit === "Fahrenheit") {
@@ -51,12 +50,12 @@ export function convertTemperature(
 
 export const getUnits = (type: ConversionType) => {
   switch (type) {
-    case "volume":
-      return volumeUnits;
-    case "weight":
-      return weightUnits;
-    case "temperature":
-      return temperatureUnits;
+    case ConversionType.Volume:
+      return Object.values(VolumeUnit);
+    case ConversionType.Weight:
+      return Object.values(WeightUnit);
+    case ConversionType.Temperature:
+      return Object.values(TemperatureUnit);
     default:
       return [];
   }
@@ -65,8 +64,8 @@ export const getUnits = (type: ConversionType) => {
 export const convert = (
   type: ConversionType,
   input: string,
-  fromUnit: string,
-  toUnit: string
+  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit,
+  toUnit: VolumeUnit | WeightUnit | TemperatureUnit
 ) => {
   if (input === "") {
     return "";
@@ -79,11 +78,11 @@ export const convert = (
   }
 
   switch (type) {
-    case "volume":
+    case ConversionType.Volume:
       return convertVolume(inputNumber, fromUnit, toUnit);
-    case "weight":
+    case ConversionType.Weight:
       return convertWeight(inputNumber, fromUnit, toUnit);
-    case "temperature":
+    case ConversionType.Temperature:
       return convertTemperature(inputNumber, fromUnit, toUnit);
     default:
       return "";

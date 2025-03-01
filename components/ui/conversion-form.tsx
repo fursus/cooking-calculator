@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  ConversionType,
   ConversionState,
   getUnits,
   convert,
@@ -15,45 +14,51 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  ConversionType,
+  VolumeUnit,
+  WeightUnit,
+  TemperatureUnit,
+} from "@/lib/constants";
 
 export const ConversionForm = ({ type }: { type: ConversionType }) => {
   // Separate states for each conversion type
   const [volumeState, setVolumeState] = useState<ConversionState>({
     input: "",
-    fromUnit: "cups",
-    toUnit: "tablespoons",
+    fromUnit: VolumeUnit.Cups,
+    toUnit: VolumeUnit.Tablespoons,
   });
 
   const [weightState, setWeightState] = useState<ConversionState>({
     input: "",
-    fromUnit: "ounces",
-    toUnit: "grams",
+    fromUnit: WeightUnit.Ounces,
+    toUnit: WeightUnit.Grams,
   });
 
   const [temperatureState, setTemperatureState] = useState<ConversionState>({
     input: "",
-    fromUnit: "Fahrenheit",
-    toUnit: "Celsius",
+    fromUnit: TemperatureUnit.Fahrenheit,
+    toUnit: TemperatureUnit.Celsius,
   });
 
   const updateState = (
     type: ConversionType,
     updates: Partial<ConversionState>
   ) => {
-    if (type === "volume") {
+    if (type === ConversionType.Volume) {
       setVolumeState((prev) => ({ ...prev, ...updates }));
-    } else if (type === "weight") {
+    } else if (type === ConversionType.Weight) {
       setWeightState((prev) => ({ ...prev, ...updates }));
-    } else if (type === "temperature") {
+    } else if (type === ConversionType.Temperature) {
       setTemperatureState((prev) => ({ ...prev, ...updates }));
     }
   };
 
   // Determine the current state based on the conversion type
   const state =
-    type === "volume"
+    type === ConversionType.Volume
       ? volumeState
-      : type === "weight"
+      : type === ConversionType.Weight
       ? weightState
       : temperatureState;
 
@@ -79,7 +84,11 @@ export const ConversionForm = ({ type }: { type: ConversionType }) => {
           <Label htmlFor={`${type}-from`}>From</Label>
           <Select
             value={state.fromUnit}
-            onValueChange={(value) => updateState(type, { fromUnit: value })}
+            onValueChange={(value) =>
+              updateState(type, {
+                fromUnit: value as VolumeUnit | WeightUnit | TemperatureUnit,
+              })
+            }
           >
             <SelectTrigger id={`${type}-from`}>
               <SelectValue placeholder="Select unit" />
@@ -97,7 +106,11 @@ export const ConversionForm = ({ type }: { type: ConversionType }) => {
           <Label htmlFor={`${type}-to`}>To</Label>
           <Select
             value={state.toUnit}
-            onValueChange={(value) => updateState(type, { toUnit: value })}
+            onValueChange={(value) =>
+              updateState(type, {
+                toUnit: value as VolumeUnit | WeightUnit | TemperatureUnit,
+              })
+            }
           >
             <SelectTrigger id={`${type}-to`}>
               <SelectValue placeholder="Select unit" />

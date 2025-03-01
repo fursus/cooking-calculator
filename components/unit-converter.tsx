@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConversionForm } from "./ui/conversion-form";
+import { ConversionType } from "@/lib/constants";
 
 export default function UnitConverter() {
   return (
@@ -20,20 +21,22 @@ export default function UnitConverter() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue="volume" className="w-full">
+        <Tabs defaultValue={ConversionType.Volume} className="w-full">
           <TabsList className="grid w-full grid-cols-3 mb-4">
-            <TabsTrigger value="volume">Volume</TabsTrigger>
-            <TabsTrigger value="weight">Weight</TabsTrigger>
-            <TabsTrigger value="temperature">Temp</TabsTrigger>
+            <TabsTrigger value={ConversionType.Volume}>Volume</TabsTrigger>
+            <TabsTrigger value={ConversionType.Weight}>Weight</TabsTrigger>
+            <TabsTrigger value={ConversionType.Temperature}>
+              Temperature
+            </TabsTrigger>
           </TabsList>
-          <TabsContent value="volume">
-            <ConversionForm type="volume" />
+          <TabsContent value={ConversionType.Volume}>
+            <ConversionForm type={ConversionType.Volume} />
           </TabsContent>
-          <TabsContent value="weight">
-            <ConversionForm type="weight" />
+          <TabsContent value={ConversionType.Weight}>
+            <ConversionForm type={ConversionType.Weight} />
           </TabsContent>
-          <TabsContent value="temperature">
-            <ConversionForm type="temperature" />
+          <TabsContent value={ConversionType.Temperature}>
+            <ConversionForm type={ConversionType.Temperature} />
           </TabsContent>
         </Tabs>
       </CardContent>
