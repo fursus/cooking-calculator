@@ -10,8 +10,19 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConversionForm } from "./ui/conversion-form";
 import { ConversionType } from "@/lib/constants";
+import { useConversionType } from "@/contexts/ConversionTypeContext";
 
 export default function UnitConverter() {
+  const context = useConversionType();
+
+  if (!context) {
+    throw new Error(
+      "UnitConverter must be used within a ConversionTypeProvider"
+    );
+  }
+
+  const { conversionType, handleConversionTypeChange } = context;
+
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
@@ -21,7 +32,13 @@ export default function UnitConverter() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Tabs defaultValue={ConversionType.Volume} className="w-full">
+        <Tabs
+          value={conversionType}
+          onValueChange={(value) =>
+            handleConversionTypeChange(value as ConversionType)
+          }
+          className="w-full"
+        >
           <TabsList className="grid w-full grid-cols-3 mb-4">
             <TabsTrigger value={ConversionType.Volume}>Volume</TabsTrigger>
             <TabsTrigger value={ConversionType.Weight}>Weight</TabsTrigger>
@@ -30,13 +47,13 @@ export default function UnitConverter() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value={ConversionType.Volume}>
-            <ConversionForm type={ConversionType.Volume} />
+            <ConversionForm />
           </TabsContent>
           <TabsContent value={ConversionType.Weight}>
-            <ConversionForm type={ConversionType.Weight} />
+            <ConversionForm />
           </TabsContent>
           <TabsContent value={ConversionType.Temperature}>
-            <ConversionForm type={ConversionType.Temperature} />
+            <ConversionForm />
           </TabsContent>
         </Tabs>
       </CardContent>

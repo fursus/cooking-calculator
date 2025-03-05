@@ -20,8 +20,19 @@ import {
   WeightUnit,
   TemperatureUnit,
 } from "@/lib/constants";
+import { useConversionType } from "@/contexts/ConversionTypeContext";
 
-export const ConversionForm = ({ type }: { type: ConversionType }) => {
+export const ConversionForm = () => {
+  const context = useConversionType();
+
+  if (!context) {
+    throw new Error(
+      "ConversionForm must be used within a ConversionTypeProvider"
+    );
+  }
+
+  const { conversionType } = context;
+
   // Separate states for each conversion type
   const [volumeState, setVolumeState] = useState<ConversionState>({
     input: "",
@@ -56,41 +67,48 @@ export const ConversionForm = ({ type }: { type: ConversionType }) => {
 
   // Determine the current state based on the conversion type
   const state =
-    type === ConversionType.Volume
+    conversionType === ConversionType.Volume
       ? volumeState
-      : type === ConversionType.Weight
+      : conversionType === ConversionType.Weight
       ? weightState
       : temperatureState;
 
-  const units = getUnits(type);
-  const result = convert(type, state.input, state.fromUnit, state.toUnit);
+  const units = getUnits(conversionType);
+  const result = convert(
+    conversionType,
+    state.input,
+    state.fromUnit,
+    state.toUnit
+  );
   const formattedResult =
     typeof result === "number" ? formatNumber(result) : result;
 
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor={`${type}-input`}>Value</Label>
+        <Label htmlFor={`${conversionType}-input`}>Value</Label>
         <Input
           autoFocus
-          id={`${type}-input`}
+          id={`${conversionType}-input`}
           type="number"
           value={state.input}
-          onChange={(e) => updateState(type, { input: e.target.value })}
+          onChange={(e) =>
+            updateState(conversionType, { input: e.target.value })
+          }
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor={`${type}-from`}>From</Label>
+          <Label htmlFor={`${conversionType}-from`}>From</Label>
           <Select
             value={state.fromUnit}
             onValueChange={(value) =>
-              updateState(type, {
+              updateState(conversionType, {
                 fromUnit: value as VolumeUnit | WeightUnit | TemperatureUnit,
               })
             }
           >
-            <SelectTrigger id={`${type}-from`}>
+            <SelectTrigger id={`${conversionType}-from`}>
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
@@ -103,16 +121,16 @@ export const ConversionForm = ({ type }: { type: ConversionType }) => {
           </Select>
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`${type}-to`}>To</Label>
+          <Label htmlFor={`${conversionType}-to`}>To</Label>
           <Select
             value={state.toUnit}
             onValueChange={(value) =>
-              updateState(type, {
+              updateState(conversionType, {
                 toUnit: value as VolumeUnit | WeightUnit | TemperatureUnit,
               })
             }
           >
-            <SelectTrigger id={`${type}-to`}>
+            <SelectTrigger id={`${conversionType}-to`}>
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
@@ -126,9 +144,9 @@ export const ConversionForm = ({ type }: { type: ConversionType }) => {
         </div>
       </div>
       <div className="space-y-2">
-        <Label htmlFor={`${type}-result`}>Result</Label>
+        <Label htmlFor={`${conversionType}-result`}>Result</Label>
         <Input
-          id={`${type}-result`}
+          id={`${conversionType}-result`}
           type="text"
           value={formattedResult}
           readOnly
