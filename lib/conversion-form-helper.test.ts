@@ -2,7 +2,6 @@ import {
   convertVolume,
   convertWeight,
   convertTemperature,
-  getUnits,
   convert,
 } from "./conversion-form-helper";
 
@@ -91,23 +90,6 @@ describe("Unit Converter Helper", () => {
         TemperatureUnit.Fahrenheit
       );
       expect(result).toBe(1);
-    });
-  });
-
-  describe("getUnits", () => {
-    it("should return the correct units for volume", () => {
-      const result = getUnits(ConversionType.Volume);
-      expect(result).toStrictEqual(Object.values(VolumeUnit));
-    });
-
-    it("should return the correct units for weight", () => {
-      const result = getUnits(ConversionType.Weight);
-      expect(result).toStrictEqual(Object.values(WeightUnit));
-    });
-
-    it("should return the correct units for temperature", () => {
-      const result = getUnits(ConversionType.Temperature);
-      expect(result).toStrictEqual(Object.values(TemperatureUnit));
     });
   });
 

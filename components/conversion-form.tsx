@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   ConversionState,
-  getUnits,
   convert,
 } from "@/lib/conversion-form-helper";
 import { formatNumber } from "@/lib/utils";
