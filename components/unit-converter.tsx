@@ -8,8 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ConversionForm } from "./ui/conversion-form";
-import { ConversionType } from "@/lib/constants";
+import { ConversionForm } from "@/components/conversion-form";
+import {ConversionType, TemperatureUnit, VolumeUnit, WeightUnit} from "@/lib/constants";
+
+const volumeUnits = Object.values(VolumeUnit);
+const weightUnits = Object.values(WeightUnit);
+const temperatureUnits = Object.values(TemperatureUnit);
+
 
 export default function UnitConverter() {
   return (
@@ -30,13 +35,13 @@ export default function UnitConverter() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value={ConversionType.Volume}>
-            <ConversionForm type={ConversionType.Volume} />
+            <ConversionForm type={ConversionType.Volume} units={volumeUnits} />
           </TabsContent>
           <TabsContent value={ConversionType.Weight}>
-            <ConversionForm type={ConversionType.Weight} />
+            <ConversionForm type={ConversionType.Weight} units={weightUnits} />
           </TabsContent>
           <TabsContent value={ConversionType.Temperature}>
-            <ConversionForm type={ConversionType.Temperature} />
+            <ConversionForm type={ConversionType.Temperature} units={temperatureUnits} />
           </TabsContent>
         </Tabs>
       </CardContent>
