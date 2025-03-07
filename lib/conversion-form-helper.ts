@@ -48,19 +48,6 @@ export function convertTemperature(
   }
 }
 
-export const getUnits = (type: ConversionType) => {
-  switch (type) {
-    case ConversionType.Volume:
-      return Object.values(VolumeUnit);
-    case ConversionType.Weight:
-      return Object.values(WeightUnit);
-    case ConversionType.Temperature:
-      return Object.values(TemperatureUnit);
-    default:
-      return [];
-  }
-};
-
 export const convert = (
   type: ConversionType,
   input: string,

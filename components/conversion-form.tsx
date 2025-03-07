@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   ConversionState,
-  getUnits,
   convert,
 } from "@/lib/conversion-form-helper";
 import { formatNumber } from "@/lib/utils";
@@ -18,11 +17,10 @@ import {
   ConversionType,
   VolumeUnit,
   WeightUnit,
-  TemperatureUnit,
+  TemperatureUnit, Unit,
 } from "@/lib/constants";
 
-export const ConversionForm = ({ type }: { type: ConversionType }) => {
-  // Separate states for each conversion type
+export const ConversionForm = ({ type, units }: { type: ConversionType, units: Unit[] }) => {
   const [volumeState, setVolumeState] = useState<ConversionState>({
     input: "",
     fromUnit: VolumeUnit.Cups,
@@ -62,7 +60,6 @@ export const ConversionForm = ({ type }: { type: ConversionType }) => {
       ? weightState
       : temperatureState;
 
-  const units = getUnits(type);
   const result = convert(type, state.input, state.fromUnit, state.toUnit);
   const formattedResult =
     typeof result === "number" ? formatNumber(result) : result;
