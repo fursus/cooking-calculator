@@ -1,4 +1,4 @@
-import {ChangeEvent, Dispatch, SetStateAction, useEffect, useState} from "react";
+import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
 import {
   convert,
 } from "@/lib/conversion-form-helper";
@@ -39,18 +39,14 @@ interface ConversionFormProps {
 export const ConversionForm = ({ type, units, input, setInput }: ConversionFormProps) => {
   const [fromUnit, setFromUnit] = useState(units[0]);
   const [toUnit, setToUnit] = useState(units[1]);
-  const [formattedResult, setFormattedResult] = useState("");
-
-  useEffect(() => {
-    const result = convert(type, input, fromUnit, toUnit);
-    const formattedResult =
-        typeof result === "number" ? formatNumber(result) : result;
-    setFormattedResult(formattedResult);
-  }, [type, input, fromUnit, toUnit]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => setInput(event.target.value);
   const handleFromUnitChange = (value:string) => setFromUnit(value as Unit);
   const handleToUnitChange = (value:string) => setToUnit(value as Unit);
+
+  const result = convert(type, input, fromUnit, toUnit);
+  const formattedResult =
+      typeof result === "number" ? formatNumber(result) : result;
 
   return (
     <div className="space-y-4">
