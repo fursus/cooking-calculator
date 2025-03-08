@@ -1,4 +1,4 @@
-import {ChangeEvent, useEffect, useState} from "react";
+import {ChangeEvent, Dispatch, SetStateAction, useEffect, useState} from "react";
 import {
   convert,
 } from "@/lib/conversion-form-helper";
@@ -17,9 +17,26 @@ import {
   Unit,
 } from "@/lib/constants";
 
-export const ConversionForm = ({ type, units }: { type: ConversionType, units: Unit[] }) => {
+const UnitDropdownOptions = ({units}:{units: ReadonlyArray<Unit>}) => {
+  return(
+      <>
+        {units.map((unit) => (
+            <SelectItem key={unit} value={unit}>
+              {unit}
+            </SelectItem>
+        ))}
+      </>
+      )
+}
 
-  const [input, setInput] = useState("");
+interface ConversionFormProps {
+    type: ConversionType;
+    units: ReadonlyArray<Unit>;
+    input: string;
+    setInput: Dispatch<SetStateAction<string>>;
+}
+
+export const ConversionForm = ({ type, units, input, setInput }: ConversionFormProps) => {
   const [fromUnit, setFromUnit] = useState(units[0]);
   const [toUnit, setToUnit] = useState(units[1]);
   const [formattedResult, setFormattedResult] = useState("");
@@ -58,11 +75,7 @@ export const ConversionForm = ({ type, units }: { type: ConversionType, units: U
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
-              {units.map((unit) => (
-                <SelectItem key={unit} value={unit}>
-                  {unit}
-                </SelectItem>
-              ))}
+              <UnitDropdownOptions units={units} />
             </SelectContent>
           </Select>
         </div>
@@ -76,11 +89,7 @@ export const ConversionForm = ({ type, units }: { type: ConversionType, units: U
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
-              {units.map((unit) => (
-                <SelectItem key={unit} value={unit}>
-                  {unit}
-                </SelectItem>
-              ))}
+              <UnitDropdownOptions units={units} />
             </SelectContent>
           </Select>
         </div>

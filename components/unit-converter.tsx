@@ -10,6 +10,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ConversionForm } from "@/components/conversion-form";
 import {ConversionType, TemperatureUnit, VolumeUnit, WeightUnit} from "@/lib/constants";
+import {useState} from "react";
 
 const volumeUnits = Object.values(VolumeUnit);
 const weightUnits = Object.values(WeightUnit);
@@ -17,6 +18,8 @@ const temperatureUnits = Object.values(TemperatureUnit);
 
 
 export default function UnitConverter() {
+  const [input, setInput] = useState("");
+
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
@@ -35,13 +38,13 @@ export default function UnitConverter() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value={ConversionType.Volume}>
-            <ConversionForm type={ConversionType.Volume} units={volumeUnits} />
+            <ConversionForm type={ConversionType.Volume} units={volumeUnits} input={input} setInput={setInput} />
           </TabsContent>
           <TabsContent value={ConversionType.Weight}>
-            <ConversionForm type={ConversionType.Weight} units={weightUnits} />
+            <ConversionForm type={ConversionType.Weight} units={weightUnits} input={input} setInput={setInput}/>
           </TabsContent>
           <TabsContent value={ConversionType.Temperature}>
-            <ConversionForm type={ConversionType.Temperature} units={temperatureUnits} />
+            <ConversionForm type={ConversionType.Temperature} units={temperatureUnits} input={input} setInput={setInput}/>
           </TabsContent>
         </Tabs>
       </CardContent>
