@@ -7,12 +7,6 @@ import {
   TemperatureUnit,
 } from "./constants";
 
-export interface ConversionState {
-  input: string;
-  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit;
-  toUnit: VolumeUnit | WeightUnit | TemperatureUnit;
-}
-
 export function convertVolume(
   value: number,
   fromUnit: VolumeUnit | WeightUnit | TemperatureUnit,
