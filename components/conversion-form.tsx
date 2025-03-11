@@ -1,8 +1,5 @@
-import { useState } from "react";
-import {
-  ConversionState,
-  convert,
-} from "@/lib/conversion-form-helper";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { convert } from "@/lib/conversion-form-helper";
 import { formatNumber } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -13,54 +10,42 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  ConversionType,
-  VolumeUnit,
-  WeightUnit,
-  TemperatureUnit, Unit,
-} from "@/lib/constants";
+import { ConversionType, Unit } from "@/lib/constants";
 
-export const ConversionForm = ({ type, units }: { type: ConversionType, units: Unit[] }) => {
-  const [volumeState, setVolumeState] = useState<ConversionState>({
-    input: "",
-    fromUnit: VolumeUnit.Cups,
-    toUnit: VolumeUnit.Tablespoons,
-  });
+const UnitDropdownOptions = ({ units }: { units: ReadonlyArray<Unit> }) => {
+  return (
+    <>
+      {units.map((unit) => (
+        <SelectItem key={unit} value={unit}>
+          {unit}
+        </SelectItem>
+      ))}
+    </>
+  );
+};
 
-  const [weightState, setWeightState] = useState<ConversionState>({
-    input: "",
-    fromUnit: WeightUnit.Ounces,
-    toUnit: WeightUnit.Grams,
-  });
+interface ConversionFormProps {
+  type: ConversionType;
+  units: ReadonlyArray<Unit>;
+  input: string;
+  setInput: Dispatch<SetStateAction<string>>;
+}
 
-  const [temperatureState, setTemperatureState] = useState<ConversionState>({
-    input: "",
-    fromUnit: TemperatureUnit.Fahrenheit,
-    toUnit: TemperatureUnit.Celsius,
-  });
+export const ConversionForm = ({
+  type,
+  units,
+  input,
+  setInput,
+}: ConversionFormProps) => {
+  const [fromUnit, setFromUnit] = useState(units[0]);
+  const [toUnit, setToUnit] = useState(units[1]);
 
-  const updateState = (
-    type: ConversionType,
-    updates: Partial<ConversionState>
-  ) => {
-    if (type === ConversionType.Volume) {
-      setVolumeState((prev) => ({ ...prev, ...updates }));
-    } else if (type === ConversionType.Weight) {
-      setWeightState((prev) => ({ ...prev, ...updates }));
-    } else if (type === ConversionType.Temperature) {
-      setTemperatureState((prev) => ({ ...prev, ...updates }));
-    }
-  };
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) =>
+    setInput(event.target.value);
+  const handleFromUnitChange = (value: string) => setFromUnit(value as Unit);
+  const handleToUnitChange = (value: string) => setToUnit(value as Unit);
 
-  // Determine the current state based on the conversion type
-  const state =
-    type === ConversionType.Volume
-      ? volumeState
-      : type === ConversionType.Weight
-      ? weightState
-      : temperatureState;
-
-  const result = convert(type, state.input, state.fromUnit, state.toUnit);
+  const result = convert(type, input, fromUnit, toUnit);
   const formattedResult =
     typeof result === "number" ? formatNumber(result) : result;
 
@@ -72,52 +57,30 @@ export const ConversionForm = ({ type, units }: { type: ConversionType, units: U
           autoFocus
           id={`${type}-input`}
           type="number"
-          value={state.input}
-          onChange={(e) => updateState(type, { input: e.target.value })}
+          value={input}
+          onChange={handleInputChange}
         />
       </div>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor={`${type}-from`}>From</Label>
-          <Select
-            value={state.fromUnit}
-            onValueChange={(value) =>
-              updateState(type, {
-                fromUnit: value as VolumeUnit | WeightUnit | TemperatureUnit,
-              })
-            }
-          >
+          <Select value={fromUnit} onValueChange={handleFromUnitChange}>
             <SelectTrigger id={`${type}-from`}>
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
-              {units.map((unit) => (
-                <SelectItem key={unit} value={unit}>
-                  {unit}
-                </SelectItem>
-              ))}
+              <UnitDropdownOptions units={units} />
             </SelectContent>
           </Select>
         </div>
         <div className="space-y-2">
           <Label htmlFor={`${type}-to`}>To</Label>
-          <Select
-            value={state.toUnit}
-            onValueChange={(value) =>
-              updateState(type, {
-                toUnit: value as VolumeUnit | WeightUnit | TemperatureUnit,
-              })
-            }
-          >
+          <Select value={toUnit} onValueChange={handleToUnitChange}>
             <SelectTrigger id={`${type}-to`}>
               <SelectValue placeholder="Select unit" />
             </SelectTrigger>
             <SelectContent>
-              {units.map((unit) => (
-                <SelectItem key={unit} value={unit}>
-                  {unit}
-                </SelectItem>
-              ))}
+              <UnitDropdownOptions units={units} />
             </SelectContent>
           </Select>
         </div>
