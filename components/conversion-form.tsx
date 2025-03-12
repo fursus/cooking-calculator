@@ -62,6 +62,7 @@ export const ConversionForm = ({
           autoFocus
           id={`${type}-input`}
           type="number"
+          min={0}
           value={input}
           onChange={handleInputChange}
         />
