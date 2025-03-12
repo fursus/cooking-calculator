@@ -4,11 +4,7 @@ import {
   convertTemperature,
 } from "./conversion-form-helper";
 
-import {
-  VolumeUnit,
-  WeightUnit,
-  TemperatureUnit,
-} from "./constants";
+import { VolumeUnit, WeightUnit, TemperatureUnit } from "./constants";
 
 describe("Unit Converter Helper", () => {
   describe("convertVolume", () => {

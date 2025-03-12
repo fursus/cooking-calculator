@@ -28,7 +28,7 @@ interface ConversionFormProps {
   units: ReadonlyArray<Unit>;
   input: string;
   setInput: Dispatch<SetStateAction<string>>;
-  convert: (input: number, from:Unit, to:Unit) => number;
+  convert: (input: number, from: Unit, to: Unit) => number;
 }
 
 export const ConversionForm = ({
@@ -36,7 +36,7 @@ export const ConversionForm = ({
   units,
   input,
   setInput,
-    convert,
+  convert,
 }: ConversionFormProps) => {
   const [fromUnit, setFromUnit] = useState(units[0]);
   const [toUnit, setToUnit] = useState(units[1]);
@@ -46,10 +46,11 @@ export const ConversionForm = ({
   const handleFromUnitChange = (value: string) => setFromUnit(value as Unit);
   const handleToUnitChange = (value: string) => setToUnit(value as Unit);
 
-
-
   const numericInput = Number(input);
-  const result = input !== "" && !isNaN(numericInput) ? convert(numericInput, fromUnit, toUnit): ""
+  const result =
+    input !== "" && !isNaN(numericInput)
+      ? convert(numericInput, fromUnit, toUnit)
+      : "";
   const formattedResult =
     typeof result === "number" ? formatNumber(result) : result;
 
