@@ -16,6 +16,7 @@ import {
   WeightUnit,
 } from "@/lib/constants";
 import { useState } from "react";
+import {convertTemperature, convertVolume, convertWeight} from "@/lib/conversion-form-helper";
 
 const volumeUnits = Object.values(VolumeUnit);
 const weightUnits = Object.values(WeightUnit);
@@ -47,6 +48,7 @@ export default function UnitConverter() {
               units={volumeUnits}
               input={input}
               setInput={setInput}
+              convert={convertVolume}
             />
           </TabsContent>
           <TabsContent value={ConversionType.Weight}>
@@ -55,6 +57,7 @@ export default function UnitConverter() {
               units={weightUnits}
               input={input}
               setInput={setInput}
+              convert={convertWeight}
             />
           </TabsContent>
           <TabsContent value={ConversionType.Temperature}>
@@ -63,6 +66,7 @@ export default function UnitConverter() {
               units={temperatureUnits}
               input={input}
               setInput={setInput}
+              convert={convertTemperature}
             />
           </TabsContent>
         </Tabs>
