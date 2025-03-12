@@ -1,7 +1,6 @@
 import {
   volumeConversions,
   weightConversions,
-  ConversionType,
   VolumeUnit,
   WeightUnit,
   TemperatureUnit,
@@ -41,31 +40,3 @@ export function convertTemperature(
     return value * (9 / 5) + 32;
   }
 }
-
-export const convert = (
-  type: ConversionType,
-  input: string,
-  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit,
-  toUnit: VolumeUnit | WeightUnit | TemperatureUnit
-) => {
-  if (input === "") {
-    return "";
-  }
-
-  const inputNumber = Number(input);
-
-  if (isNaN(inputNumber)) {
-    return "";
-  }
-
-  switch (type) {
-    case ConversionType.Volume:
-      return convertVolume(inputNumber, fromUnit, toUnit);
-    case ConversionType.Weight:
-      return convertWeight(inputNumber, fromUnit, toUnit);
-    case ConversionType.Temperature:
-      return convertTemperature(inputNumber, fromUnit, toUnit);
-    default:
-      return "";
-  }
-};

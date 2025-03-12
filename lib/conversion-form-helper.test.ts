@@ -2,15 +2,9 @@ import {
   convertVolume,
   convertWeight,
   convertTemperature,
-  convert,
 } from "./conversion-form-helper";
 
-import {
-  VolumeUnit,
-  WeightUnit,
-  TemperatureUnit,
-  ConversionType,
-} from "./constants";
+import { VolumeUnit, WeightUnit, TemperatureUnit } from "./constants";
 
 describe("Unit Converter Helper", () => {
   describe("convertVolume", () => {
@@ -90,58 +84,6 @@ describe("Unit Converter Helper", () => {
         TemperatureUnit.Fahrenheit
       );
       expect(result).toBe(1);
-    });
-  });
-
-  describe("convert", () => {
-    it("should convert volume", () => {
-      const result = convert(
-        ConversionType.Volume,
-        "1",
-        VolumeUnit.Cups,
-        VolumeUnit.Tablespoons
-      );
-      expect(result).toBe(16);
-    });
-
-    it("should convert weight", () => {
-      const result = convert(
-        ConversionType.Weight,
-        "1",
-        WeightUnit.Ounces,
-        WeightUnit.Pounds
-      );
-      expect(result).toBe(0.0625);
-    });
-
-    it("should convert temperature", () => {
-      const result = convert(
-        ConversionType.Temperature,
-        "-40",
-        TemperatureUnit.Fahrenheit,
-        TemperatureUnit.Celsius
-      );
-      expect(result).toBe(-40);
-    });
-
-    it("should return an empty string if the input is empty", () => {
-      const result = convert(
-        ConversionType.Volume,
-        "",
-        VolumeUnit.Cups,
-        VolumeUnit.Tablespoons
-      );
-      expect(result).toBe("");
-    });
-
-    it("should return an empty string if the input is not a number", () => {
-      const result = convert(
-        ConversionType.Volume,
-        "not a number",
-        VolumeUnit.Cups,
-        VolumeUnit.Tablespoons
-      );
-      expect(result).toBe("");
     });
   });
 });
