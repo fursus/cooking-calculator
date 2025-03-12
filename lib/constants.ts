@@ -25,6 +25,8 @@ export enum TemperatureUnit {
   Celsius = "Celsius",
 }
 
+export type Unit = VolumeUnit | WeightUnit | TemperatureUnit;
+
 export const volumeConversions = {
   cups: 1,
   tablespoons: 16,

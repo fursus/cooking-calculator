@@ -8,10 +8,27 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ConversionForm } from "./ui/conversion-form";
-import { ConversionType } from "@/lib/constants";
+import { ConversionForm } from "@/components/conversion-form";
+import {
+  ConversionType,
+  TemperatureUnit,
+  VolumeUnit,
+  WeightUnit,
+} from "@/lib/constants";
+import { useState } from "react";
+import {
+  convertTemperature,
+  convertVolume,
+  convertWeight,
+} from "@/lib/conversion-form-helper";
+
+const volumeUnits = Object.values(VolumeUnit);
+const weightUnits = Object.values(WeightUnit);
+const temperatureUnits = Object.values(TemperatureUnit);
 
 export default function UnitConverter() {
+  const [input, setInput] = useState("");
+
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
@@ -30,13 +47,31 @@ export default function UnitConverter() {
             </TabsTrigger>
           </TabsList>
           <TabsContent value={ConversionType.Volume}>
-            <ConversionForm type={ConversionType.Volume} />
+            <ConversionForm
+              type={ConversionType.Volume}
+              units={volumeUnits}
+              input={input}
+              setInput={setInput}
+              convert={convertVolume}
+            />
           </TabsContent>
           <TabsContent value={ConversionType.Weight}>
-            <ConversionForm type={ConversionType.Weight} />
+            <ConversionForm
+              type={ConversionType.Weight}
+              units={weightUnits}
+              input={input}
+              setInput={setInput}
+              convert={convertWeight}
+            />
           </TabsContent>
           <TabsContent value={ConversionType.Temperature}>
-            <ConversionForm type={ConversionType.Temperature} />
+            <ConversionForm
+              type={ConversionType.Temperature}
+              units={temperatureUnits}
+              input={input}
+              setInput={setInput}
+              convert={convertTemperature}
+            />
           </TabsContent>
         </Tabs>
       </CardContent>

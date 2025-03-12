@@ -1,17 +1,10 @@
 import {
   volumeConversions,
   weightConversions,
-  ConversionType,
   VolumeUnit,
   WeightUnit,
   TemperatureUnit,
 } from "./constants";
-
-export interface ConversionState {
-  input: string;
-  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit;
-  toUnit: VolumeUnit | WeightUnit | TemperatureUnit;
-}
 
 export function convertVolume(
   value: number,
@@ -47,44 +40,3 @@ export function convertTemperature(
     return value * (9 / 5) + 32;
   }
 }
-
-export const getUnits = (type: ConversionType) => {
-  switch (type) {
-    case ConversionType.Volume:
-      return Object.values(VolumeUnit);
-    case ConversionType.Weight:
-      return Object.values(WeightUnit);
-    case ConversionType.Temperature:
-      return Object.values(TemperatureUnit);
-    default:
-      return [];
-  }
-};
-
-export const convert = (
-  type: ConversionType,
-  input: string,
-  fromUnit: VolumeUnit | WeightUnit | TemperatureUnit,
-  toUnit: VolumeUnit | WeightUnit | TemperatureUnit
-) => {
-  if (input === "") {
-    return "";
-  }
-
-  const inputNumber = Number(input);
-
-  if (isNaN(inputNumber)) {
-    return "";
-  }
-
-  switch (type) {
-    case ConversionType.Volume:
-      return convertVolume(inputNumber, fromUnit, toUnit);
-    case ConversionType.Weight:
-      return convertWeight(inputNumber, fromUnit, toUnit);
-    case ConversionType.Temperature:
-      return convertTemperature(inputNumber, fromUnit, toUnit);
-    default:
-      return "";
-  }
-};
