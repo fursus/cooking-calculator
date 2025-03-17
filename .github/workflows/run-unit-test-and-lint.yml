@@ -1,4 +1,4 @@
-name: Unit Testing
+name: Run Jest tests and ESLint
 on: 
   pull_request: 
     branches: [master]
@@ -11,5 +11,5 @@ jobs:
       run: npm i
     - name: Run tests
       run: npm run test
-    - name: Run linter
+    - name: Run lint
       run: eslint . --ext .js,.jsx,.ts,.tsx
