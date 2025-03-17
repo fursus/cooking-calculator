@@ -11,3 +11,5 @@ jobs:
       run: npm i
     - name: Run tests
       run: npm run test
+    - name: Run linter
+      run: eslint . --ext .js,.jsx,.ts,.tsx
