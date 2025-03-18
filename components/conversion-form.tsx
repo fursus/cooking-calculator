@@ -10,9 +10,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ConversionType, Unit } from "@/lib/constants";
-import { TemperatureTable } from "./conversion-table";
-import { WeightTable } from "./conversion-table";
-import { VolumeTable } from "./conversion-table";
 
 const UnitDropdownOptions = ({ units }: { units: ReadonlyArray<Unit> }) => {
   return (
@@ -32,6 +29,7 @@ interface ConversionFormProps {
   input: string;
   setInput: Dispatch<SetStateAction<string>>;
   convert: (input: number, from: Unit, to: Unit) => number;
+  conversionTable: React.ReactNode;
 }
 
 export const ConversionForm = ({
@@ -40,6 +38,7 @@ export const ConversionForm = ({
   input,
   setInput,
   convert,
+  conversionTable,
 }: ConversionFormProps) => {
   const [fromUnit, setFromUnit] = useState(units[0]);
   const [toUnit, setToUnit] = useState(units[1]);
@@ -104,10 +103,7 @@ export const ConversionForm = ({
           />
         </div>
       </div>
-
-      {type === ConversionType.Volume && <VolumeTable />}
-      {type === ConversionType.Weight && <WeightTable />}
-      {type === ConversionType.Temperature && <TemperatureTable />}
+      {conversionTable}
     </>
   );
 };
