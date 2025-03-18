@@ -29,6 +29,7 @@ interface ConversionFormProps {
   input: string;
   setInput: Dispatch<SetStateAction<string>>;
   convert: (input: number, from: Unit, to: Unit) => number;
+  conversionTable: React.ReactNode;
 }
 
 export const ConversionForm = ({
@@ -37,6 +38,7 @@ export const ConversionForm = ({
   input,
   setInput,
   convert,
+  conversionTable,
 }: ConversionFormProps) => {
   const [fromUnit, setFromUnit] = useState(units[0]);
   const [toUnit, setToUnit] = useState(units[1]);
@@ -55,50 +57,53 @@ export const ConversionForm = ({
     typeof result === "number" ? formatNumber(result) : result;
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor={`${type}-input`}>Value</Label>
-        <Input
-          autoFocus
-          id={`${type}-input`}
-          type="number"
-          value={input}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+    <>
+      <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor={`${type}-from`}>From</Label>
-          <Select value={fromUnit} onValueChange={handleFromUnitChange}>
-            <SelectTrigger id={`${type}-from`}>
-              <SelectValue placeholder="Select unit" />
-            </SelectTrigger>
-            <SelectContent>
-              <UnitDropdownOptions units={units} />
-            </SelectContent>
-          </Select>
+          <Label htmlFor={`${type}-input`}>Value</Label>
+          <Input
+            autoFocus
+            id={`${type}-input`}
+            type="number"
+            value={input}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor={`${type}-from`}>From</Label>
+            <Select value={fromUnit} onValueChange={handleFromUnitChange}>
+              <SelectTrigger id={`${type}-from`}>
+                <SelectValue placeholder="Select unit" />
+              </SelectTrigger>
+              <SelectContent>
+                <UnitDropdownOptions units={units} />
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor={`${type}-to`}>To</Label>
+            <Select value={toUnit} onValueChange={handleToUnitChange}>
+              <SelectTrigger id={`${type}-to`}>
+                <SelectValue placeholder="Select unit" />
+              </SelectTrigger>
+              <SelectContent>
+                <UnitDropdownOptions units={units} />
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`${type}-to`}>To</Label>
-          <Select value={toUnit} onValueChange={handleToUnitChange}>
-            <SelectTrigger id={`${type}-to`}>
-              <SelectValue placeholder="Select unit" />
-            </SelectTrigger>
-            <SelectContent>
-              <UnitDropdownOptions units={units} />
-            </SelectContent>
-          </Select>
+          <Label htmlFor={`${type}-result`}>Result</Label>
+          <Input
+            id={`${type}-result`}
+            type="text"
+            value={formattedResult}
+            readOnly
+          />
         </div>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor={`${type}-result`}>Result</Label>
-        <Input
-          id={`${type}-result`}
-          type="text"
-          value={formattedResult}
-          readOnly
-        />
-      </div>
-    </div>
+      {conversionTable}
+    </>
   );
 };

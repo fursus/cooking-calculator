@@ -21,6 +21,7 @@ import {
   convertVolume,
   convertWeight,
 } from "@/lib/conversion-form-helper";
+import { TemperatureTable, WeightTable, VolumeTable } from "./conversion-table";
 
 const volumeUnits = Object.values(VolumeUnit);
 const weightUnits = Object.values(WeightUnit);
@@ -30,7 +31,7 @@ export default function UnitConverter() {
   const [input, setInput] = useState("");
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full max-w-2xl mx-auto mb-16">
       <CardHeader>
         <CardTitle>Cooking Unit Converter</CardTitle>
         <CardDescription>
@@ -53,6 +54,7 @@ export default function UnitConverter() {
               input={input}
               setInput={setInput}
               convert={convertVolume}
+              conversionTable={<VolumeTable />}
             />
           </TabsContent>
           <TabsContent value={ConversionType.Weight}>
@@ -62,6 +64,7 @@ export default function UnitConverter() {
               input={input}
               setInput={setInput}
               convert={convertWeight}
+              conversionTable={<WeightTable />}
             />
           </TabsContent>
           <TabsContent value={ConversionType.Temperature}>
@@ -71,6 +74,7 @@ export default function UnitConverter() {
               input={input}
               setInput={setInput}
               convert={convertTemperature}
+              conversionTable={<TemperatureTable />}
             />
           </TabsContent>
         </Tabs>
