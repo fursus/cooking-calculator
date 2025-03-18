@@ -9,7 +9,7 @@ import {
 
 export const VolumeTable = () => {
   return (
-    <div className="flex flex-col items-center mx-auto">
+    <div className="flex flex-col items-center mx-auto my-6">
       <Table className="text-center">
         <TableHeader>
           <TableRow>
@@ -80,7 +80,7 @@ export const VolumeTable = () => {
 
 export const WeightTable = () => {
   return (
-    <div className="flex flex-col items-center w-1/3 mx-auto">
+    <div className="flex flex-col items-center mx-auto my-6">
       <Table className="text-center">
         <TableHeader>
           <TableRow>
@@ -195,8 +195,8 @@ export const WeightTable = () => {
 
 export const TemperatureTable = () => {
   return (
-    <div className="flex flex-col items-center">
-      <div className="w-1/3 mx-auto text-center text-xl">
+    <div className="flex flex-col items-center mx-auto my-6">
+      <div className="mx-auto text-center text-xl">
         <p>Formula: (F - 32) * 5/9 = C</p>
       </div>
       <div className="flex justify-center">

@@ -10,6 +10,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ConversionType, Unit } from "@/lib/constants";
+import { TemperatureTable } from "./conversion-table";
+import { WeightTable } from "./conversion-table";
+import { VolumeTable } from "./conversion-table";
 
 const UnitDropdownOptions = ({ units }: { units: ReadonlyArray<Unit> }) => {
   return (
@@ -55,50 +58,56 @@ export const ConversionForm = ({
     typeof result === "number" ? formatNumber(result) : result;
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor={`${type}-input`}>Value</Label>
-        <Input
-          autoFocus
-          id={`${type}-input`}
-          type="number"
-          value={input}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="grid grid-cols-2 gap-4">
+    <>
+      <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor={`${type}-from`}>From</Label>
-          <Select value={fromUnit} onValueChange={handleFromUnitChange}>
-            <SelectTrigger id={`${type}-from`}>
-              <SelectValue placeholder="Select unit" />
-            </SelectTrigger>
-            <SelectContent>
-              <UnitDropdownOptions units={units} />
-            </SelectContent>
-          </Select>
+          <Label htmlFor={`${type}-input`}>Value</Label>
+          <Input
+            autoFocus
+            id={`${type}-input`}
+            type="number"
+            value={input}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor={`${type}-from`}>From</Label>
+            <Select value={fromUnit} onValueChange={handleFromUnitChange}>
+              <SelectTrigger id={`${type}-from`}>
+                <SelectValue placeholder="Select unit" />
+              </SelectTrigger>
+              <SelectContent>
+                <UnitDropdownOptions units={units} />
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor={`${type}-to`}>To</Label>
+            <Select value={toUnit} onValueChange={handleToUnitChange}>
+              <SelectTrigger id={`${type}-to`}>
+                <SelectValue placeholder="Select unit" />
+              </SelectTrigger>
+              <SelectContent>
+                <UnitDropdownOptions units={units} />
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div className="space-y-2">
-          <Label htmlFor={`${type}-to`}>To</Label>
-          <Select value={toUnit} onValueChange={handleToUnitChange}>
-            <SelectTrigger id={`${type}-to`}>
-              <SelectValue placeholder="Select unit" />
-            </SelectTrigger>
-            <SelectContent>
-              <UnitDropdownOptions units={units} />
-            </SelectContent>
-          </Select>
+          <Label htmlFor={`${type}-result`}>Result</Label>
+          <Input
+            id={`${type}-result`}
+            type="text"
+            value={formattedResult}
+            readOnly
+          />
         </div>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor={`${type}-result`}>Result</Label>
-        <Input
-          id={`${type}-result`}
-          type="text"
-          value={formattedResult}
-          readOnly
-        />
-      </div>
-    </div>
+
+      {type === ConversionType.Volume && <VolumeTable />}
+      {type === ConversionType.Weight && <WeightTable />}
+      {type === ConversionType.Temperature && <TemperatureTable />}
+    </>
   );
 };
