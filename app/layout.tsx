@@ -15,8 +15,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Cooking Companion",
-  description:
-    "Cooking Companion is an all-in-one calculator for your cooking and baking needs.",
+  description: "An all-in-one calculator for your cooking and baking needs!",
+  openGraph: {
+    title: "Cooking Companion",
+    description: "An all-in-one calculator for your cooking and baking needs!",
+    url: "https://cookingcompanion.cc",
+    siteName: "Cooking Companion",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
