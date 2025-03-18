@@ -1,0 +1,15 @@
+name: Run Jest tests and ESLint
+on:
+  pull_request:
+    branches: [master]
+jobs:
+  run-unit-test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Install dependencies
+        run: npm i
+      - name: Run tests
+        run: npm run test
+      - name: Run lint
+        run: npm run lint
