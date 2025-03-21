@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import GoogleTagManager from "@next/third-parties/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {/* @ts-expect-error Google Tag Manager cannot be used as a JSX component */}
+      <GoogleTagManager gtmId="GTM-PT5Z96NM" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
