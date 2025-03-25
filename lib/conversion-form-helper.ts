@@ -1,11 +1,19 @@
 import {
   volumeConversions,
   weightConversions,
-  Unit, VolumeUnit,
+  Unit, VolumeUnit, WeightUnit, TemperatureUnit,
 } from "./constants";
 
-function isVolumeUnit(unit: Unit): unit is VolumeUnit {
-  return Object.values(VolumeUnit).includes(unit as VolumeUnit);
+function checkOfType<T extends Unit>(
+    units: ReadonlyArray<Unit>,
+    enumObj: Record<string, T>,
+): void {
+
+  units.forEach((unit) => {
+    if(!Object.values(enumObj).includes(unit as T)){
+      throw new Error(`Invalid unit: ${unit}.`);
+    }
+  });
 }
 
 export function convertVolume(
@@ -13,13 +21,9 @@ export function convertVolume(
   fromUnit: Unit,
   toUnit: Unit,
 ): number {
-  if (!isVolumeUnit(fromUnit)) {
-    throw new Error(`Invalid volume unit: ${fromUnit}.`);
-  }
+  checkOfType([fromUnit, toUnit], VolumeUnit);
 
-  if (!isVolumeUnit(toUnit)) {
-    throw new Error(`Invalid volume unit: ${toUnit}.`);
-  }
+  if (fromUnit === toUnit) return value;
 
   const baseCups =
     value / volumeConversions[fromUnit as keyof typeof volumeConversions];
@@ -31,6 +35,11 @@ export function convertWeight(
   fromUnit: Unit,
   toUnit: Unit,
 ): number {
+
+  checkOfType([fromUnit, toUnit], WeightUnit);
+
+  if (fromUnit === toUnit) return value;
+
   const baseOunces =
     value / weightConversions[fromUnit as keyof typeof weightConversions];
   return (
@@ -43,7 +52,10 @@ export function convertTemperature(
   fromUnit: Unit,
   toUnit: Unit,
 ): number {
+  checkOfType([fromUnit, toUnit], TemperatureUnit);
+
   if (fromUnit === toUnit) return value;
+
   if (fromUnit === "Fahrenheit") {
     return (value - 32) * (5 / 9);
   } else {
