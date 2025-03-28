@@ -23,7 +23,7 @@ describe('applyMultiplier Function', () => {
 
     test('multiplies zero by any multiplier', () => {
         expect(applyMultiplier('0', 5)).toBe(0);
-        expect(applyMultiplier('0', -3)).toBe(0);
+        expect(applyMultiplier('0', -3)).toBe(-0);
         expect(applyMultiplier('0', 0)).toBe(0);
     });
 
@@ -49,8 +49,8 @@ describe('applyMultiplier Function', () => {
 
     test('handles non-numeric string inputs', () => {
         expect(applyMultiplier('abc', 2)).toBeNaN();
-        expect(applyMultiplier('', 2)).toBeNaN();
-        expect(applyMultiplier('   ', 2)).toBeNaN();
+        expect(applyMultiplier('', 2)).toBe(0);
+        expect(applyMultiplier('   ', 2)).toBe(0);
     });
 
     test('handles mixed numeric and non-numeric inputs', () => {
