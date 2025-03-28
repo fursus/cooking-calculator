@@ -37,6 +37,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <GoogleTagManager gtmId="GTM-PT5Z96NM" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0736331777233622"
+          crossOrigin="anonymous"
+        ></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
