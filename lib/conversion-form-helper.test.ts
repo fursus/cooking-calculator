@@ -1,270 +1,254 @@
-import {
-  convertVolume,
-  convertWeight,
-  convertTemperature,
-} from "./conversion-form-helper";
+import { convertVolume, convertWeight, convertTemperature } from './conversion-form-helper';
 
-import {VolumeUnit, WeightUnit, TemperatureUnit, Unit} from "./constants";
+import { VolumeUnit, WeightUnit, TemperatureUnit, Unit } from './constants';
 
-describe("Unit Converter Helper", () => {
-  describe("convertVolume", () => {
-    it("should convert cups to tablespoons", () => {
+describe('Unit Converter Helper', () => {
+  describe('convertVolume', () => {
+    it('should convert cups to tablespoons', () => {
       const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.Tablespoons);
       expect(result).toBe(16);
     });
 
-    it("should convert tablespoons to teaspoons", () => {
-      const result = convertVolume(
-        1,
-        VolumeUnit.Tablespoons,
-        VolumeUnit.Teaspoons
-      );
+    it('should convert tablespoons to teaspoons', () => {
+      const result = convertVolume(1, VolumeUnit.Tablespoons, VolumeUnit.Teaspoons);
       expect(result).toBe(3);
     });
 
-    it("should convert fluid ounces to milliliters", () => {
-      const result = convertVolume(
-        1,
-        VolumeUnit.FluidOunces,
-        VolumeUnit.Milliliters
-      );
+    it('should convert fluid ounces to milliliters', () => {
+      const result = convertVolume(1, VolumeUnit.FluidOunces, VolumeUnit.Milliliters);
       expect(result).toBe(29.5735);
     });
 
-    it("should convert milliliters to liters", () => {
-      const result = convertVolume(
-        1,
-        VolumeUnit.Milliliters,
-        VolumeUnit.Liters
-      );
+    it('should convert milliliters to liters', () => {
+      const result = convertVolume(1, VolumeUnit.Milliliters, VolumeUnit.Liters);
       expect(result).toBe(0.001);
     });
 
-      describe("Cups conversions", () => {
-        it("should convert cups to cups (identity)", () => {
-          const result = convertVolume(2, VolumeUnit.Cups, VolumeUnit.Cups);
-          expect(result).toBe(2);
-        });
-
-        it("should convert cups to tablespoons", () => {
-          const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.Tablespoons);
-          expect(result).toBe(16);
-        });
-
-        it("should convert cups to teaspoons", () => {
-          const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.Teaspoons);
-          expect(result).toBe(48);
-        });
-
-        it("should convert cups to fluid ounces", () => {
-          const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.FluidOunces);
-          expect(result).toBe(8);
-        });
-
-        it("should convert cups to milliliters", () => {
-          const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.Milliliters);
-          expect(result).toBeCloseTo(236.59);
-        });
-
-        it("should convert cups to liters", () => {
-          const result = convertVolume(4, VolumeUnit.Cups, VolumeUnit.Liters);
-          expect(result).toBeCloseTo(0.946);
-        });
+    describe('Cups conversions', () => {
+      it('should convert cups to cups (identity)', () => {
+        const result = convertVolume(2, VolumeUnit.Cups, VolumeUnit.Cups);
+        expect(result).toBe(2);
       });
 
-      describe("Tablespoons conversions", () => {
-        it("should convert tablespoons to cups", () => {
-          const result = convertVolume(16, VolumeUnit.Tablespoons, VolumeUnit.Cups);
-          expect(result).toBe(1);
-        });
-
-        it("should convert tablespoons to tablespoons (identity)", () => {
-          const result = convertVolume(5, VolumeUnit.Tablespoons, VolumeUnit.Tablespoons);
-          expect(result).toBe(5);
-        });
-
-        it("should convert tablespoons to teaspoons", () => {
-          const result = convertVolume(1, VolumeUnit.Tablespoons, VolumeUnit.Teaspoons);
-          expect(result).toBe(3);
-        });
-
-        it("should convert tablespoons to fluid ounces", () => {
-          const result = convertVolume(2, VolumeUnit.Tablespoons, VolumeUnit.FluidOunces);
-          expect(result).toBe(1);
-        });
-
-        it("should convert tablespoons to milliliters", () => {
-          const result = convertVolume(1, VolumeUnit.Tablespoons, VolumeUnit.Milliliters);
-          expect(result).toBeCloseTo(14.79);
-        });
-
-        it("should convert tablespoons to liters", () => {
-          const result = convertVolume(200, VolumeUnit.Tablespoons, VolumeUnit.Liters);
-          expect(result).toBeCloseTo(2.96);
-        });
+      it('should convert cups to tablespoons', () => {
+        const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.Tablespoons);
+        expect(result).toBe(16);
       });
 
-      describe("Teaspoons conversions", () => {
-        it("should convert teaspoons to cups", () => {
-          const result = convertVolume(48, VolumeUnit.Teaspoons, VolumeUnit.Cups);
-          expect(result).toBe(1);
-        });
-
-        it("should convert teaspoons to tablespoons", () => {
-          const result = convertVolume(3, VolumeUnit.Teaspoons, VolumeUnit.Tablespoons);
-          expect(result).toBe(1);
-        });
-
-        it("should convert teaspoons to teaspoons (identity)", () => {
-          const result = convertVolume(7, VolumeUnit.Teaspoons, VolumeUnit.Teaspoons);
-          expect(result).toBe(7);
-        });
-
-        it("should convert teaspoons to fluid ounces", () => {
-          const result = convertVolume(6, VolumeUnit.Teaspoons, VolumeUnit.FluidOunces);
-          expect(result).toBe(1);
-        });
-
-        it("should convert teaspoons to milliliters", () => {
-          const result = convertVolume(1, VolumeUnit.Teaspoons, VolumeUnit.Milliliters);
-          expect(result).toBeCloseTo(4.93);
-        });
-
-        it("should convert teaspoons to liters", () => {
-          const result = convertVolume(202, VolumeUnit.Teaspoons, VolumeUnit.Liters);
-          expect(result).toBeCloseTo(0.995);
-        });
+      it('should convert cups to teaspoons', () => {
+        const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.Teaspoons);
+        expect(result).toBe(48);
       });
 
-      describe("Fluid ounces conversions", () => {
-        it("should convert fluid ounces to cups", () => {
-          const result = convertVolume(8, VolumeUnit.FluidOunces, VolumeUnit.Cups);
-          expect(result).toBe(1);
-        });
-
-        it("should convert fluid ounces to tablespoons", () => {
-          const result = convertVolume(1, VolumeUnit.FluidOunces, VolumeUnit.Tablespoons);
-          expect(result).toBe(2);
-        });
-
-        it("should convert fluid ounces to teaspoons", () => {
-          const result = convertVolume(1, VolumeUnit.FluidOunces, VolumeUnit.Teaspoons);
-          expect(result).toBe(6);
-        });
-
-        it("should convert fluid ounces to fluid ounces (identity)", () => {
-          const result = convertVolume(3.5, VolumeUnit.FluidOunces, VolumeUnit.FluidOunces);
-          expect(result).toBe(3.5);
-        });
-
-        it("should convert fluid ounces to milliliters", () => {
-          const result = convertVolume(1, VolumeUnit.FluidOunces, VolumeUnit.Milliliters);
-          expect(result).toBeCloseTo(29.57);
-        });
-
-        it("should convert fluid ounces to liters", () => {
-          const result = convertVolume(33.81, VolumeUnit.FluidOunces, VolumeUnit.Liters);
-          expect(result).toBeCloseTo(1);
-        });
+      it('should convert cups to fluid ounces', () => {
+        const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.FluidOunces);
+        expect(result).toBe(8);
       });
 
-      describe("Milliliters conversions", () => {
-        it("should convert milliliters to cups", () => {
-          const result = convertVolume(236.59, VolumeUnit.Milliliters, VolumeUnit.Cups);
-          expect(result).toBeCloseTo(1);
-        });
-
-        it("should convert milliliters to tablespoons", () => {
-          const result = convertVolume(14.79, VolumeUnit.Milliliters, VolumeUnit.Tablespoons);
-          expect(result).toBeCloseTo(1);
-        });
-
-        it("should convert milliliters to teaspoons", () => {
-          const result = convertVolume(4.93, VolumeUnit.Milliliters, VolumeUnit.Teaspoons);
-          expect(result).toBeCloseTo(1);
-        });
-
-        it("should convert milliliters to fluid ounces", () => {
-          const result = convertVolume(29.57, VolumeUnit.Milliliters, VolumeUnit.FluidOunces);
-          expect(result).toBeCloseTo(1);
-        });
-
-        it("should convert milliliters to milliliters (identity)", () => {
-          const result = convertVolume(125, VolumeUnit.Milliliters, VolumeUnit.Milliliters);
-          expect(result).toBe(125);
-        });
-
-        it("should convert milliliters to liters", () => {
-          const result = convertVolume(1000, VolumeUnit.Milliliters, VolumeUnit.Liters);
-          expect(result).toBe(1);
-        });
+      it('should convert cups to milliliters', () => {
+        const result = convertVolume(1, VolumeUnit.Cups, VolumeUnit.Milliliters);
+        expect(result).toBeCloseTo(236.59);
       });
 
-      describe("Liters conversions", () => {
-        it("should convert liters to cups", () => {
-          const result = convertVolume(0.946, VolumeUnit.Liters, VolumeUnit.Cups);
-          expect(result).toBeCloseTo(4);
-        });
+      it('should convert cups to liters', () => {
+        const result = convertVolume(4, VolumeUnit.Cups, VolumeUnit.Liters);
+        expect(result).toBeCloseTo(0.946);
+      });
+    });
 
-        it("should convert liters to tablespoons", () => {
-          const result = convertVolume(0.0148, VolumeUnit.Liters, VolumeUnit.Tablespoons);
-          expect(result).toBeCloseTo(1);
-        });
-
-        it("should convert liters to teaspoons", () => {
-          const result = convertVolume(0.00493, VolumeUnit.Liters, VolumeUnit.Teaspoons);
-          expect(result).toBeCloseTo(1);
-        });
-
-        it("should convert liters to fluid ounces", () => {
-          const result = convertVolume(1, VolumeUnit.Liters, VolumeUnit.FluidOunces);
-          expect(result).toBeCloseTo(33.81);
-        });
-
-        it("should convert liters to milliliters", () => {
-          const result = convertVolume(1, VolumeUnit.Liters, VolumeUnit.Milliliters);
-          expect(result).toBe(1000);
-        });
-
-        it("should convert liters to liters (identity)", () => {
-          const result = convertVolume(2.5, VolumeUnit.Liters, VolumeUnit.Liters);
-          expect(result).toBe(2.5);
-        });
+    describe('Tablespoons conversions', () => {
+      it('should convert tablespoons to cups', () => {
+        const result = convertVolume(16, VolumeUnit.Tablespoons, VolumeUnit.Cups);
+        expect(result).toBe(1);
       });
 
-      describe("Edge cases", () => {
-        it("should handle zero values", () => {
-          const result = convertVolume(0, VolumeUnit.Cups, VolumeUnit.Milliliters);
-          expect(result).toBe(0);
-        });
-
-        it("should handle negative values", () => {
-          const result = convertVolume(-1, VolumeUnit.Cups, VolumeUnit.Milliliters);
-          expect(result).toBeCloseTo(-236.59);
-        });
-
-        it("should handle decimal values", () => {
-          const result = convertVolume(0.5, VolumeUnit.Cups, VolumeUnit.Tablespoons);
-          expect(result).toBe(8);
-        });
-
-        it("should handle large values", () => {
-          const result = convertVolume(1000, VolumeUnit.Milliliters, VolumeUnit.Cups);
-          expect(result).toBeCloseTo(4.227);
-        });
+      it('should convert tablespoons to tablespoons (identity)', () => {
+        const result = convertVolume(5, VolumeUnit.Tablespoons, VolumeUnit.Tablespoons);
+        expect(result).toBe(5);
       });
-    describe("Volume Conversion Validation Tests", () => {
-      describe("Valid conversions", () => {
-        it("should accept valid volume unit conversions", () => {
+
+      it('should convert tablespoons to teaspoons', () => {
+        const result = convertVolume(1, VolumeUnit.Tablespoons, VolumeUnit.Teaspoons);
+        expect(result).toBe(3);
+      });
+
+      it('should convert tablespoons to fluid ounces', () => {
+        const result = convertVolume(2, VolumeUnit.Tablespoons, VolumeUnit.FluidOunces);
+        expect(result).toBe(1);
+      });
+
+      it('should convert tablespoons to milliliters', () => {
+        const result = convertVolume(1, VolumeUnit.Tablespoons, VolumeUnit.Milliliters);
+        expect(result).toBeCloseTo(14.79);
+      });
+
+      it('should convert tablespoons to liters', () => {
+        const result = convertVolume(200, VolumeUnit.Tablespoons, VolumeUnit.Liters);
+        expect(result).toBeCloseTo(2.96);
+      });
+    });
+
+    describe('Teaspoons conversions', () => {
+      it('should convert teaspoons to cups', () => {
+        const result = convertVolume(48, VolumeUnit.Teaspoons, VolumeUnit.Cups);
+        expect(result).toBe(1);
+      });
+
+      it('should convert teaspoons to tablespoons', () => {
+        const result = convertVolume(3, VolumeUnit.Teaspoons, VolumeUnit.Tablespoons);
+        expect(result).toBe(1);
+      });
+
+      it('should convert teaspoons to teaspoons (identity)', () => {
+        const result = convertVolume(7, VolumeUnit.Teaspoons, VolumeUnit.Teaspoons);
+        expect(result).toBe(7);
+      });
+
+      it('should convert teaspoons to fluid ounces', () => {
+        const result = convertVolume(6, VolumeUnit.Teaspoons, VolumeUnit.FluidOunces);
+        expect(result).toBe(1);
+      });
+
+      it('should convert teaspoons to milliliters', () => {
+        const result = convertVolume(1, VolumeUnit.Teaspoons, VolumeUnit.Milliliters);
+        expect(result).toBeCloseTo(4.93);
+      });
+
+      it('should convert teaspoons to liters', () => {
+        const result = convertVolume(202, VolumeUnit.Teaspoons, VolumeUnit.Liters);
+        expect(result).toBeCloseTo(0.995);
+      });
+    });
+
+    describe('Fluid ounces conversions', () => {
+      it('should convert fluid ounces to cups', () => {
+        const result = convertVolume(8, VolumeUnit.FluidOunces, VolumeUnit.Cups);
+        expect(result).toBe(1);
+      });
+
+      it('should convert fluid ounces to tablespoons', () => {
+        const result = convertVolume(1, VolumeUnit.FluidOunces, VolumeUnit.Tablespoons);
+        expect(result).toBe(2);
+      });
+
+      it('should convert fluid ounces to teaspoons', () => {
+        const result = convertVolume(1, VolumeUnit.FluidOunces, VolumeUnit.Teaspoons);
+        expect(result).toBe(6);
+      });
+
+      it('should convert fluid ounces to fluid ounces (identity)', () => {
+        const result = convertVolume(3.5, VolumeUnit.FluidOunces, VolumeUnit.FluidOunces);
+        expect(result).toBe(3.5);
+      });
+
+      it('should convert fluid ounces to milliliters', () => {
+        const result = convertVolume(1, VolumeUnit.FluidOunces, VolumeUnit.Milliliters);
+        expect(result).toBeCloseTo(29.57);
+      });
+
+      it('should convert fluid ounces to liters', () => {
+        const result = convertVolume(33.81, VolumeUnit.FluidOunces, VolumeUnit.Liters);
+        expect(result).toBeCloseTo(1);
+      });
+    });
+
+    describe('Milliliters conversions', () => {
+      it('should convert milliliters to cups', () => {
+        const result = convertVolume(236.59, VolumeUnit.Milliliters, VolumeUnit.Cups);
+        expect(result).toBeCloseTo(1);
+      });
+
+      it('should convert milliliters to tablespoons', () => {
+        const result = convertVolume(14.79, VolumeUnit.Milliliters, VolumeUnit.Tablespoons);
+        expect(result).toBeCloseTo(1);
+      });
+
+      it('should convert milliliters to teaspoons', () => {
+        const result = convertVolume(4.93, VolumeUnit.Milliliters, VolumeUnit.Teaspoons);
+        expect(result).toBeCloseTo(1);
+      });
+
+      it('should convert milliliters to fluid ounces', () => {
+        const result = convertVolume(29.57, VolumeUnit.Milliliters, VolumeUnit.FluidOunces);
+        expect(result).toBeCloseTo(1);
+      });
+
+      it('should convert milliliters to milliliters (identity)', () => {
+        const result = convertVolume(125, VolumeUnit.Milliliters, VolumeUnit.Milliliters);
+        expect(result).toBe(125);
+      });
+
+      it('should convert milliliters to liters', () => {
+        const result = convertVolume(1000, VolumeUnit.Milliliters, VolumeUnit.Liters);
+        expect(result).toBe(1);
+      });
+    });
+
+    describe('Liters conversions', () => {
+      it('should convert liters to cups', () => {
+        const result = convertVolume(0.946, VolumeUnit.Liters, VolumeUnit.Cups);
+        expect(result).toBeCloseTo(4);
+      });
+
+      it('should convert liters to tablespoons', () => {
+        const result = convertVolume(0.0148, VolumeUnit.Liters, VolumeUnit.Tablespoons);
+        expect(result).toBeCloseTo(1);
+      });
+
+      it('should convert liters to teaspoons', () => {
+        const result = convertVolume(0.00493, VolumeUnit.Liters, VolumeUnit.Teaspoons);
+        expect(result).toBeCloseTo(1);
+      });
+
+      it('should convert liters to fluid ounces', () => {
+        const result = convertVolume(1, VolumeUnit.Liters, VolumeUnit.FluidOunces);
+        expect(result).toBeCloseTo(33.81);
+      });
+
+      it('should convert liters to milliliters', () => {
+        const result = convertVolume(1, VolumeUnit.Liters, VolumeUnit.Milliliters);
+        expect(result).toBe(1000);
+      });
+
+      it('should convert liters to liters (identity)', () => {
+        const result = convertVolume(2.5, VolumeUnit.Liters, VolumeUnit.Liters);
+        expect(result).toBe(2.5);
+      });
+    });
+
+    describe('Edge cases', () => {
+      it('should handle zero values', () => {
+        const result = convertVolume(0, VolumeUnit.Cups, VolumeUnit.Milliliters);
+        expect(result).toBe(0);
+      });
+
+      it('should handle negative values', () => {
+        const result = convertVolume(-1, VolumeUnit.Cups, VolumeUnit.Milliliters);
+        expect(result).toBeCloseTo(-236.59);
+      });
+
+      it('should handle decimal values', () => {
+        const result = convertVolume(0.5, VolumeUnit.Cups, VolumeUnit.Tablespoons);
+        expect(result).toBe(8);
+      });
+
+      it('should handle large values', () => {
+        const result = convertVolume(1000, VolumeUnit.Milliliters, VolumeUnit.Cups);
+        expect(result).toBeCloseTo(4.227);
+      });
+    });
+    describe('Volume Conversion Validation Tests', () => {
+      describe('Valid conversions', () => {
+        it('should accept valid volume unit conversions', () => {
           expect(() => {
             convertVolume(1, VolumeUnit.Cups, VolumeUnit.Tablespoons);
           }).not.toThrow();
         });
 
-        it("should handle all valid volume unit combinations", () => {
+        it('should handle all valid volume unit combinations', () => {
           const volumeUnits = Object.values(VolumeUnit);
-          volumeUnits.forEach(fromUnit => {
-            volumeUnits.forEach(toUnit => {
+          volumeUnits.forEach((fromUnit) => {
+            volumeUnits.forEach((toUnit) => {
               expect(() => {
                 convertVolume(1, fromUnit, toUnit);
               }).not.toThrow();
@@ -273,56 +257,56 @@ describe("Unit Converter Helper", () => {
         });
       });
 
-      describe("Invalid from unit", () => {
-        it("should throw an error when fromUnit is a weight unit", () => {
+      describe('Invalid from unit', () => {
+        it('should throw an error when fromUnit is a weight unit', () => {
           expect(() => {
             convertVolume(1, WeightUnit.Grams as unknown as Unit, VolumeUnit.Cups);
           }).toThrow(/Invalid unit: grams/);
         });
 
-        it("should throw an error when fromUnit is a temperature unit", () => {
+        it('should throw an error when fromUnit is a temperature unit', () => {
           expect(() => {
             convertVolume(1, TemperatureUnit.Celsius as unknown as Unit, VolumeUnit.Cups);
           }).toThrow(/Invalid unit: Celsius/);
         });
 
-        it("should throw an error with a non-existent unit", () => {
+        it('should throw an error with a non-existent unit', () => {
           expect(() => {
-            convertVolume(1, "gallons" as unknown as Unit, VolumeUnit.Cups);
+            convertVolume(1, 'gallons' as unknown as Unit, VolumeUnit.Cups);
           }).toThrow(/Invalid unit/);
         });
       });
 
-      describe("Invalid to unit", () => {
-        it("should throw an error when toUnit is a weight unit", () => {
+      describe('Invalid to unit', () => {
+        it('should throw an error when toUnit is a weight unit', () => {
           expect(() => {
             convertVolume(1, VolumeUnit.Cups, WeightUnit.Pounds as unknown as Unit);
           }).toThrow(/Invalid unit: pounds/);
         });
 
-        it("should throw an error when toUnit is a temperature unit", () => {
+        it('should throw an error when toUnit is a temperature unit', () => {
           expect(() => {
             convertVolume(1, VolumeUnit.Cups, TemperatureUnit.Fahrenheit as unknown as Unit);
           }).toThrow(/Invalid unit: Fahrenheit/);
         });
 
-        it("should throw an error with a non-existent unit", () => {
+        it('should throw an error with a non-existent unit', () => {
           expect(() => {
-            convertVolume(1, VolumeUnit.Cups, "quarts" as unknown as Unit);
+            convertVolume(1, VolumeUnit.Cups, 'quarts' as unknown as Unit);
           }).toThrow(/Invalid unit/);
         });
       });
 
-      describe("Both units invalid", () => {
-        it("should throw an error mentioning the first invalid unit when both units are invalid", () => {
+      describe('Both units invalid', () => {
+        it('should throw an error mentioning the first invalid unit when both units are invalid', () => {
           expect(() => {
             convertVolume(1, WeightUnit.Kilograms as unknown as Unit, TemperatureUnit.Celsius as unknown as Unit);
           }).toThrow(/Invalid unit: kilograms/);
         });
       });
 
-      describe("Edge cases", () => {
-        it("should throw an error with undefined units", () => {
+      describe('Edge cases', () => {
+        it('should throw an error with undefined units', () => {
           expect(() => {
             convertVolume(1, undefined as unknown as Unit, VolumeUnit.Cups);
           }).toThrow(/Invalid unit/);
@@ -332,7 +316,7 @@ describe("Unit Converter Helper", () => {
           }).toThrow(/Invalid unit/);
         });
 
-        it("should throw an error with null units", () => {
+        it('should throw an error with null units', () => {
           expect(() => {
             convertVolume(1, null as unknown as Unit, VolumeUnit.Cups);
           }).toThrow(/Invalid unit/);
@@ -562,163 +546,163 @@ describe("Unit Converter Helper", () => {
     });
   });
 
-  describe("convertWeight", () => {
-    it("should convert ounces to pounds", () => {
+  describe('convertWeight', () => {
+    it('should convert ounces to pounds', () => {
       const result = convertWeight(1, WeightUnit.Ounces, WeightUnit.Pounds);
       expect(result).toBe(0.0625);
     });
 
-    it("should convert pounds to grams", () => {
+    it('should convert pounds to grams', () => {
       const result = convertWeight(1, WeightUnit.Pounds, WeightUnit.Grams);
       expect(result).toBe(453.592);
     });
 
-    it("should convert grams to kilograms", () => {
+    it('should convert grams to kilograms', () => {
       const result = convertWeight(1, WeightUnit.Grams, WeightUnit.Kilograms);
       expect(result).toBe(0.001);
     });
-    describe("Ounces conversions", () => {
-      it("should convert ounces to ounces (identity)", () => {
+    describe('Ounces conversions', () => {
+      it('should convert ounces to ounces (identity)', () => {
         const result = convertWeight(3, WeightUnit.Ounces, WeightUnit.Ounces);
         expect(result).toBe(3);
       });
 
-      it("should convert ounces to pounds", () => {
+      it('should convert ounces to pounds', () => {
         const result = convertWeight(16, WeightUnit.Ounces, WeightUnit.Pounds);
         expect(result).toBe(1);
       });
 
-      it("should convert ounces to grams", () => {
+      it('should convert ounces to grams', () => {
         const result = convertWeight(1, WeightUnit.Ounces, WeightUnit.Grams);
         expect(result).toBeCloseTo(28.35);
       });
 
-      it("should convert ounces to kilograms", () => {
+      it('should convert ounces to kilograms', () => {
         const result = convertWeight(35.27, WeightUnit.Ounces, WeightUnit.Kilograms);
         expect(result).toBeCloseTo(1);
       });
     });
 
-    describe("Pounds conversions", () => {
-      it("should convert pounds to ounces", () => {
+    describe('Pounds conversions', () => {
+      it('should convert pounds to ounces', () => {
         const result = convertWeight(1, WeightUnit.Pounds, WeightUnit.Ounces);
         expect(result).toBe(16);
       });
 
-      it("should convert pounds to pounds (identity)", () => {
+      it('should convert pounds to pounds (identity)', () => {
         const result = convertWeight(2.5, WeightUnit.Pounds, WeightUnit.Pounds);
         expect(result).toBe(2.5);
       });
 
-      it("should convert pounds to grams", () => {
+      it('should convert pounds to grams', () => {
         const result = convertWeight(1, WeightUnit.Pounds, WeightUnit.Grams);
         expect(result).toBeCloseTo(453.59);
       });
 
-      it("should convert pounds to kilograms", () => {
+      it('should convert pounds to kilograms', () => {
         const result = convertWeight(2.2046, WeightUnit.Pounds, WeightUnit.Kilograms);
         expect(result).toBeCloseTo(1);
       });
     });
 
-    describe("Grams conversions", () => {
-      it("should convert grams to ounces", () => {
+    describe('Grams conversions', () => {
+      it('should convert grams to ounces', () => {
         const result = convertWeight(28.35, WeightUnit.Grams, WeightUnit.Ounces);
         expect(result).toBeCloseTo(1);
       });
 
-      it("should convert grams to pounds", () => {
+      it('should convert grams to pounds', () => {
         const result = convertWeight(453.59, WeightUnit.Grams, WeightUnit.Pounds);
         expect(result).toBeCloseTo(1);
       });
 
-      it("should convert grams to grams (identity)", () => {
+      it('should convert grams to grams (identity)', () => {
         const result = convertWeight(42, WeightUnit.Grams, WeightUnit.Grams);
         expect(result).toBe(42);
       });
 
-      it("should convert grams to kilograms", () => {
+      it('should convert grams to kilograms', () => {
         const result = convertWeight(1000, WeightUnit.Grams, WeightUnit.Kilograms);
         expect(result).toBe(1);
       });
     });
 
-    describe("Kilograms conversions", () => {
-      it("should convert kilograms to ounces", () => {
+    describe('Kilograms conversions', () => {
+      it('should convert kilograms to ounces', () => {
         const result = convertWeight(1, WeightUnit.Kilograms, WeightUnit.Ounces);
         expect(result).toBeCloseTo(35.27);
       });
 
-      it("should convert kilograms to pounds", () => {
+      it('should convert kilograms to pounds', () => {
         const result = convertWeight(1, WeightUnit.Kilograms, WeightUnit.Pounds);
         expect(result).toBeCloseTo(2.2046);
       });
 
-      it("should convert kilograms to grams", () => {
+      it('should convert kilograms to grams', () => {
         const result = convertWeight(1, WeightUnit.Kilograms, WeightUnit.Grams);
         expect(result).toBe(1000);
       });
 
-      it("should convert kilograms to kilograms (identity)", () => {
+      it('should convert kilograms to kilograms (identity)', () => {
         const result = convertWeight(5.5, WeightUnit.Kilograms, WeightUnit.Kilograms);
         expect(result).toBe(5.5);
       });
     });
 
-    describe("Edge cases", () => {
-      it("should handle zero values", () => {
+    describe('Edge cases', () => {
+      it('should handle zero values', () => {
         const result = convertWeight(0, WeightUnit.Pounds, WeightUnit.Grams);
         expect(result).toBe(0);
       });
 
-      it("should handle negative values", () => {
+      it('should handle negative values', () => {
         const result = convertWeight(-1, WeightUnit.Kilograms, WeightUnit.Pounds);
         expect(result).toBeCloseTo(-2.2046);
       });
 
-      it("should handle decimal values", () => {
+      it('should handle decimal values', () => {
         const result = convertWeight(0.5, WeightUnit.Pounds, WeightUnit.Ounces);
         expect(result).toBe(8);
       });
 
-      it("should handle large values", () => {
+      it('should handle large values', () => {
         const result = convertWeight(1000, WeightUnit.Grams, WeightUnit.Pounds);
         expect(result).toBeCloseTo(2.2046);
       });
     });
 
-    describe("Unit validation", () => {
-      it("should throw error when fromUnit is a volume unit", () => {
+    describe('Unit validation', () => {
+      it('should throw error when fromUnit is a volume unit', () => {
         expect(() => {
           convertWeight(1, VolumeUnit.Cups as unknown as Unit, WeightUnit.Pounds);
         }).toThrow(/Invalid unit/);
       });
 
-      it("should throw error when toUnit is a volume unit", () => {
+      it('should throw error when toUnit is a volume unit', () => {
         expect(() => {
           convertWeight(1, WeightUnit.Pounds, VolumeUnit.Cups as unknown as Unit);
         }).toThrow(/Invalid unit/);
       });
 
-      it("should throw error when fromUnit is a temperature unit", () => {
+      it('should throw error when fromUnit is a temperature unit', () => {
         expect(() => {
           convertWeight(1, TemperatureUnit.Celsius as unknown as Unit, WeightUnit.Pounds);
         }).toThrow(/Invalid unit/);
       });
 
-      it("should throw error when toUnit is a temperature unit", () => {
+      it('should throw error when toUnit is a temperature unit', () => {
         expect(() => {
           convertWeight(1, WeightUnit.Pounds, TemperatureUnit.Fahrenheit as unknown as Unit);
         }).toThrow(/Invalid unit/);
       });
 
-      it("should throw error with non-existent unit", () => {
+      it('should throw error with non-existent unit', () => {
         expect(() => {
-          convertWeight(1, "tons" as unknown as Unit, WeightUnit.Pounds);
+          convertWeight(1, 'tons' as unknown as Unit, WeightUnit.Pounds);
         }).toThrow(/Invalid unit/);
       });
 
-      it("should throw error with undefined units", () => {
+      it('should throw error with undefined units', () => {
         expect(() => {
           convertWeight(1, undefined as unknown as Unit, WeightUnit.Pounds);
         }).toThrow();
@@ -728,7 +712,7 @@ describe("Unit Converter Helper", () => {
         }).toThrow();
       });
 
-      it("should throw error with null units", () => {
+      it('should throw error with null units', () => {
         expect(() => {
           convertWeight(1, null as unknown as Unit, WeightUnit.Pounds);
         }).toThrow();
@@ -739,13 +723,13 @@ describe("Unit Converter Helper", () => {
       });
     });
 
-    describe("All combinations test", () => {
-      it("should correctly convert between all weight unit combinations", () => {
+    describe('All combinations test', () => {
+      it('should correctly convert between all weight unit combinations', () => {
         const weightUnits = Object.values(WeightUnit);
         const testValue = 10;
 
-        weightUnits.forEach(fromUnit => {
-          weightUnits.forEach(toUnit => {
+        weightUnits.forEach((fromUnit) => {
+          weightUnits.forEach((toUnit) => {
             const result1 = convertWeight(testValue, fromUnit, toUnit);
 
             const result2 = convertWeight(result1, toUnit, fromUnit);
@@ -757,79 +741,67 @@ describe("Unit Converter Helper", () => {
     });
   });
 
-  describe("convertTemperature", () => {
-    it("should convert Fahrenheit to Celsius", () => {
-      const result = convertTemperature(
-        32,
-        TemperatureUnit.Fahrenheit,
-        TemperatureUnit.Celsius
-      );
+  describe('convertTemperature', () => {
+    it('should convert Fahrenheit to Celsius', () => {
+      const result = convertTemperature(32, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
       expect(result).toBe(0);
     });
 
-    it("should convert Celsius to Fahrenheit", () => {
-      const result = convertTemperature(
-        100,
-        TemperatureUnit.Celsius,
-        TemperatureUnit.Fahrenheit
-      );
+    it('should convert Celsius to Fahrenheit', () => {
+      const result = convertTemperature(100, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
       expect(result).toBe(212);
     });
 
-    it("should return the same temperature for the same unit", () => {
-      const result = convertTemperature(
-        1,
-        TemperatureUnit.Fahrenheit,
-        TemperatureUnit.Fahrenheit
-      );
+    it('should return the same temperature for the same unit', () => {
+      const result = convertTemperature(1, TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit);
       expect(result).toBe(1);
     });
-    describe("Fahrenheit conversions", () => {
-      it("should convert Fahrenheit to Fahrenheit (identity)", () => {
+    describe('Fahrenheit conversions', () => {
+      it('should convert Fahrenheit to Fahrenheit (identity)', () => {
         const result = convertTemperature(72, TemperatureUnit.Fahrenheit, TemperatureUnit.Fahrenheit);
         expect(result).toBe(72);
       });
 
-      it("should convert Fahrenheit to Celsius", () => {
+      it('should convert Fahrenheit to Celsius', () => {
         const result = convertTemperature(32, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(result).toBe(0);
       });
 
-      it("should convert Fahrenheit to Celsius - positive value", () => {
+      it('should convert Fahrenheit to Celsius - positive value', () => {
         const result = convertTemperature(68, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(result).toBeCloseTo(20);
       });
 
-      it("should convert Fahrenheit to Celsius - negative result", () => {
+      it('should convert Fahrenheit to Celsius - negative result', () => {
         const result = convertTemperature(14, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(result).toBeCloseTo(-10);
       });
     });
 
-    describe("Celsius conversions", () => {
-      it("should convert Celsius to Celsius (identity)", () => {
+    describe('Celsius conversions', () => {
+      it('should convert Celsius to Celsius (identity)', () => {
         const result = convertTemperature(25, TemperatureUnit.Celsius, TemperatureUnit.Celsius);
         expect(result).toBe(25);
       });
 
-      it("should convert Celsius to Fahrenheit", () => {
+      it('should convert Celsius to Fahrenheit', () => {
         const result = convertTemperature(0, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
         expect(result).toBe(32);
       });
 
-      it("should convert Celsius to Fahrenheit - positive value", () => {
+      it('should convert Celsius to Fahrenheit - positive value', () => {
         const result = convertTemperature(20, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
         expect(result).toBeCloseTo(68);
       });
 
-      it("should convert Celsius to Fahrenheit - negative value", () => {
+      it('should convert Celsius to Fahrenheit - negative value', () => {
         const result = convertTemperature(-10, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
         expect(result).toBeCloseTo(14);
       });
     });
 
-    describe("Notable temperature points", () => {
-      it("should correctly convert water freezing point", () => {
+    describe('Notable temperature points', () => {
+      it('should correctly convert water freezing point', () => {
         const freezingFtoC = convertTemperature(32, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(freezingFtoC).toBeCloseTo(0);
 
@@ -837,7 +809,7 @@ describe("Unit Converter Helper", () => {
         expect(freezingCtoF).toBeCloseTo(32);
       });
 
-      it("should correctly convert water boiling point", () => {
+      it('should correctly convert water boiling point', () => {
         const boilingFtoC = convertTemperature(212, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(boilingFtoC).toBeCloseTo(100);
 
@@ -845,7 +817,7 @@ describe("Unit Converter Helper", () => {
         expect(boilingCtoF).toBeCloseTo(212);
       });
 
-      it("should correctly convert body temperature", () => {
+      it('should correctly convert body temperature', () => {
         const bodyTempFtoC = convertTemperature(98.6, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(bodyTempFtoC).toBeCloseTo(37);
 
@@ -854,43 +826,43 @@ describe("Unit Converter Helper", () => {
       });
     });
 
-    describe("Edge cases", () => {
-      it("should handle zero Celsius", () => {
+    describe('Edge cases', () => {
+      it('should handle zero Celsius', () => {
         const result = convertTemperature(0, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
         expect(result).toBe(32);
       });
 
-      it("should handle zero Fahrenheit", () => {
+      it('should handle zero Fahrenheit', () => {
         const result = convertTemperature(0, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(result).toBeCloseTo(-17.78);
       });
 
-      it("should handle negative values", () => {
+      it('should handle negative values', () => {
         const result = convertTemperature(-40, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
         expect(result).toBe(-40); // -40 is the same in both scales
       });
 
-      it("should handle extreme cold", () => {
+      it('should handle extreme cold', () => {
         const absoluteZeroF = convertTemperature(-273.15, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
         expect(absoluteZeroF).toBeCloseTo(-459.67);
       });
 
-      it("should handle extreme heat", () => {
+      it('should handle extreme heat', () => {
         const result = convertTemperature(1000, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(result).toBeCloseTo(537.78);
       });
 
-      it("should handle decimal precision", () => {
+      it('should handle decimal precision', () => {
         const result = convertTemperature(98.6, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
         expect(result).toBeCloseTo(37, 1);
       });
     });
 
-    describe("Round-trip conversions", () => {
-      it("should correctly round-trip between scales", () => {
+    describe('Round-trip conversions', () => {
+      it('should correctly round-trip between scales', () => {
         const testValues = [-50, -20, 0, 25, 37, 100, 200];
 
-        testValues.forEach(value => {
+        testValues.forEach((value) => {
           const toFahrenheit = convertTemperature(value, TemperatureUnit.Celsius, TemperatureUnit.Fahrenheit);
           const backToCelsius = convertTemperature(toFahrenheit, TemperatureUnit.Fahrenheit, TemperatureUnit.Celsius);
           expect(backToCelsius).toBeCloseTo(value);
@@ -898,38 +870,38 @@ describe("Unit Converter Helper", () => {
       });
     });
 
-    describe("Unit validation", () => {
-      it("should throw error when fromUnit is a volume unit", () => {
+    describe('Unit validation', () => {
+      it('should throw error when fromUnit is a volume unit', () => {
         expect(() => {
           convertTemperature(1, VolumeUnit.Cups as unknown as Unit, TemperatureUnit.Celsius);
         }).toThrow();
       });
 
-      it("should throw error when toUnit is a volume unit", () => {
+      it('should throw error when toUnit is a volume unit', () => {
         expect(() => {
           convertTemperature(1, TemperatureUnit.Celsius, VolumeUnit.Cups as unknown as Unit);
         }).toThrow();
       });
 
-      it("should throw error when fromUnit is a weight unit", () => {
+      it('should throw error when fromUnit is a weight unit', () => {
         expect(() => {
           convertTemperature(1, WeightUnit.Pounds as unknown as Unit, TemperatureUnit.Celsius);
         }).toThrow();
       });
 
-      it("should throw error when toUnit is a weight unit", () => {
+      it('should throw error when toUnit is a weight unit', () => {
         expect(() => {
           convertTemperature(1, TemperatureUnit.Celsius, WeightUnit.Pounds as unknown as Unit);
         }).toThrow();
       });
 
-      it("should throw error with non-existent unit", () => {
+      it('should throw error with non-existent unit', () => {
         expect(() => {
-          convertTemperature(1, "kelvin" as unknown as Unit, TemperatureUnit.Celsius);
+          convertTemperature(1, 'kelvin' as unknown as Unit, TemperatureUnit.Celsius);
         }).toThrow();
       });
 
-      it("should throw error with undefined units", () => {
+      it('should throw error with undefined units', () => {
         expect(() => {
           convertTemperature(1, undefined as unknown as Unit, TemperatureUnit.Celsius);
         }).toThrow();
@@ -939,7 +911,7 @@ describe("Unit Converter Helper", () => {
         }).toThrow();
       });
 
-      it("should throw error with null units", () => {
+      it('should throw error with null units', () => {
         expect(() => {
           convertTemperature(1, null as unknown as Unit, TemperatureUnit.Celsius);
         }).toThrow();

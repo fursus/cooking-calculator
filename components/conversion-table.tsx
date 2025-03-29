@@ -1,11 +1,4 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export const VolumeTable = () => {
   return (
@@ -16,9 +9,7 @@ export const VolumeTable = () => {
             <TableHead className="text-center font-bold">Cups</TableHead>
             <TableHead className="text-center font-bold">Tablespoons</TableHead>
             <TableHead className="text-center font-bold">Teaspoons</TableHead>
-            <TableHead className="text-center font-bold">
-              Fluid Ounces
-            </TableHead>
+            <TableHead className="text-center font-bold">Fluid Ounces</TableHead>
             <TableHead className="text-center font-bold">Milliliters</TableHead>
             <TableHead className="text-center font-bold">Liters</TableHead>
           </TableRow>
@@ -203,9 +194,7 @@ export const TemperatureTable = () => {
         <Table className="w-1/3 mx-auto text-center">
           <TableHeader>
             <TableRow>
-              <TableHead className="text-center font-bold">
-                Fahrenheit
-              </TableHead>
+              <TableHead className="text-center font-bold">Fahrenheit</TableHead>
               <TableHead className="text-center font-bold">Celsius</TableHead>
             </TableRow>
           </TableHeader>
